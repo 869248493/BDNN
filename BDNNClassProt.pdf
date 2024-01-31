@@ -1,0 +1,7282 @@
+%PDF-1.3
+%‚„œ”
+2 0 obj
+<<
+/Length 7168
+>>
+stream
+BT
+/TT2 1 Tf
+14 0 0 14 127 760 Tm
+0 g
+/GS1 gs
+0.0258 Tc
+0.2576 Tw
+(BiDirectional Neural Networks and Class Prototypes)Tj
+/TT4 1 Tf
+12 0 0 12 233 736 Tm
+0.0017 Tc
+0.0177 Tw
+(A.F. Nejad and T.D. Gedeon)Tj
+-1.1667 -1 TD
+-0.0191 Tc
+0 Tw
+(Department of Artificial Intelligence)Tj
+-2 -1 TD
+-0.0093 Tc
+(School of Computer Science and Engineering)Tj
+1.75 -1 TD
+-0.0051 Tc
+(The University of New South Wales)Tj
+1.75 -1 TD
+-0.0082 Tc
+(Sydney 2052 AUSTRALIA)Tj
+-2.25 -1 TD
+0.0016 Tc
+0.0159 Tw
+(Email: {akbar,tom}@cse.unsw.edu.au)Tj
+/TT6 1 Tf
+10 0 0 10 273 649 Tm
+0.1268 Tc
+0 Tw
+(ABSTRACT)Tj
+/TT8 1 Tf
+-16.8 -2.2 TD
+0.0052 Tc
+0.0522 Tw
+(Among the numerous existing neural network models, there are only a few bidirectional neural)Tj
+0 -1.1 TD
+-0.0033 Tc
+0 Tw
+(networks.  None of these bidirectional models are based on multi layer perceptrons.  These models)Tj
+T*
+0.0092 Tc
+0.0924 Tw
+[(also have limitations which have prevented their popularity.  We have designed Bidirectional)]TJ
+T*
+0.0014 Tc
+0.0138 Tw
+(Neural Networks \(BDNNs\) based on multi layer perceptrons trained by a generalised form of the)Tj
+T*
+0.0004 Tc
+0.0044 Tw
+(error back-propagation algorithm.  They can be trained as either associative memories or cluster)Tj
+T*
+0.0077 Tc
+0.077 Tw
+[(centroid finders.  This gives the network new abilities and enables us to design powerful data)]TJ
+T*
+0.0042 Tc
+0.0418 Tw
+[(representation techniques which are a key factor in reducing network generalisation error.  We)]TJ
+T*
+-0.0064 Tc
+0 Tw
+(demonstrate applications of this approach to extracting meaning from neural networks, and finding)Tj
+T*
+0.0133 Tc
+0.1333 Tw
+[(the centers of clusters.  This work could be a step towards simulating via the behaviour of)]TJ
+T*
+0.0029 Tc
+0.0289 Tw
+[(artificial neural networks clustering methods closer to that of the biological brain.  BDNNs may)]TJ
+T*
+0 Tc
+0 Tw
+(also be used as a simulation tool for evaluating some major cognitive psychology theories such as)Tj
+T*
+0.006 Tc
+0.0599 Tw
+[(prototypes and dual-code theory.  The successful and promising results of applying BDNNs on)]TJ
+T*
+0.0041 Tc
+0.0413 Tw
+(two real world problems \(including missing and noisy attributes\) as well as some artificial data)Tj
+T*
+-0.01 Tc
+0 Tw
+(sets is reported.)Tj
+/TT2 1 Tf
+12 0 0 12 77 457 Tm
+0.0354 Tc
+[(1)-214.6(.)-381.3(Introduction)]TJ
+/TT4 1 Tf
+10 0 0 10 77 433 Tm
+0.0073 Tc
+0.0727 Tw
+(Since Ramon y Cajal described the contact between)Tj
+T*
+-0.0046 Tc
+0 Tw
+(neurones there had been a debate over the mechanisms)Tj
+T*
+0.0451 Tc
+0.4513 Tw
+(of synaptic function until the 1950s. Then,)Tj
+T*
+0.0024 Tc
+0.0242 Tw
+(physiologists found that synaptic transmission can be)Tj
+T*
+0.0022 Tc
+0.0218 Tw
+(either electrical or chemical, and where it is electrical)Tj
+T*
+0.0151 Tc
+0.1511 Tw
+(the transmission is usually bidirectional [8,2]. We)Tj
+T*
+0.0234 Tc
+0.2345 Tw
+(shall demonstrate the simulation of this kind of)Tj
+T*
+0.0285 Tc
+0.2854 Tw
+(bidirectional transmission using artificial neural)Tj
+T*
+-0.0039 Tc
+0 Tw
+(networks and examine some applications to real world)Tj
+T*
+0.0036 Tc
+(problems.)Tj
+0 -2.2 TD
+0.0125 Tc
+0.1248 Tw
+(Most neural networks can be applied to real world)Tj
+0 -1.1 TD
+0.0032 Tc
+0.0321 Tw
+(systems to perform classification, pattern recognition)Tj
+T*
+0.007 Tc
+0.0701 Tw
+(or prediction tasks on the basis of input data. Given)Tj
+T*
+-0.0029 Tc
+0 Tw
+(the output data, however, these neural network models)Tj
+T*
+-0.0016 Tc
+(are not able to produce any plausible input data unless)Tj
+T*
+0.0081 Tc
+0.0812 Tw
+(another network is trained specifically for that task.)Tj
+T*
+0.005 Tc
+0.0496 Tw
+(This is done easily by humans. For example, we can)Tj
+T*
+0.0202 Tc
+0.2019 Tw
+(retrieve an image for an elephant from the word)Tj
+/TT8 1 Tf
+T*
+0.0196 Tc
+0 Tw
+(elephant)Tj
+/TT4 1 Tf
+3.6002 0 TD
+0.006 Tc
+0.0599 Tw
+(, and when we see an elephant we will find)Tj
+-3.6002 -1.1 TD
+-0.0017 Tc
+0 Tw
+(the corresponding word. Networks which can produce)Tj
+T*
+0.0079 Tc
+0.0794 Tw
+(plausible input values for a given output value have)Tj
+T*
+0.0091 Tc
+0.0915 Tw
+(many applications. We are particularly interested in)Tj
+T*
+0.0099 Tc
+0.0986 Tw
+(their use for constructing more accurate rules when)Tj
+T*
+-0.005 Tc
+0 Tw
+(extracting rules from trained neural networks.)Tj
+0 -2.2 TD
+0.0007 Tc
+0.0073 Tw
+(A new model of training neural networks is suggested)Tj
+0 -1.1 TD
+0.0046 Tc
+0.0456 Tw
+(that enables them to remember input patterns as well)Tj
+T*
+0.0037 Tc
+0.0372 Tw
+(as output vectors, given either of them. They may be)Tj
+T*
+0.007 Tc
+0.0699 Tw
+(trained as associative memories and cluster centroid)Tj
+T*
+0.0017 Tc
+0.0169 Tw
+(finders and are capable of classification or prediction,)Tj
+T*
+-0.0014 Tc
+0 Tw
+(in real world problems.)Tj
+23.3 36.5 TD
+0.0186 Tc
+0.1856 Tw
+(Bidirectional associative memories [9,10] and the)Tj
+0 -1.1 TD
+0.0058 Tc
+0.0583 Tw
+(bidirectional version of counterpropagation networks)Tj
+T*
+0.0326 Tc
+0.3257 Tw
+([6] have been developed to learn bidirectional)Tj
+T*
+0.0008 Tc
+0.008 Tw
+(mappings. The problem with these approaches is their)Tj
+T*
+-0.0018 Tc
+0 Tw
+(low capacity, low efficiency and multiple learning. By)Tj
+T*
+0.0217 Tc
+0.2168 Tw
+(multiple learning we mean the different learning)Tj
+T*
+-0.0064 Tc
+0 Tw
+(methods which are used in the first and second layer of)Tj
+T*
+0.003 Tc
+0.0305 Tw
+(bidirectional version of counterpropagation networks.)Tj
+T*
+0.021 Tc
+0.2095 Tw
+(BDNNs avoid the problems of these approaches.)Tj
+T*
+0.0236 Tc
+0.2355 Tw
+(Moreover, BDNNs have the power to determine)Tj
+T*
+0.0253 Tc
+0.2532 Tw
+(expected cluster centroids, at a desired level of)Tj
+T*
+0.0195 Tc
+0.1954 Tw
+(optimisation, for each class while minimising the)Tj
+T*
+-0.0024 Tc
+0 Tw
+(effects of outliers.)Tj
+0 -2.2 TD
+-0.0016 Tc
+(Two real world data sets which include missing values)Tj
+0 -1.1 TD
+0.0451 Tc
+0.4514 Tw
+(and noisy attributes have been used in the)Tj
+T*
+-0.001 Tc
+0 Tw
+(experimental part of this study to evaluate BDNNs.)Tj
+0 -2.2 TD
+0.0222 Tc
+0.2224 Tw
+(We have applied BDNNs to predict and analyse)Tj
+/TT8 1 Tf
+0 -1.1 TD
+0.0088 Tc
+0.0878 Tw
+(Student Final Marks \(SFM\) )Tj
+/TT4 1 Tf
+12 0 TD
+0.0031 Tc
+0.0311 Tw
+(by having partial grades)Tj
+-12 -1.1 TD
+0.0049 Tc
+0.0488 Tw
+(of students in a relatively large subject. This data set)Tj
+T*
+0.012 Tc
+0.1202 Tw
+(consists of 153 samples. Each pattern had fourteen)Tj
+T*
+0.0102 Tc
+0.1018 Tw
+(input attributes, and four outputs have been used to)Tj
+T*
+0.017 Tc
+0.1701 Tw
+(classify the marks. Each record comprises student)Tj
+T*
+-0.0029 Tc
+0 Tw
+(information, assessment and subsequent final mark for)Tj
+T*
+0.0232 Tc
+0.2317 Tw
+(a sample of students from a first year computer)Tj
+T*
+0.0228 Tc
+0.2282 Tw
+(science subject at The University of New South)Tj
+T*
+0 Tc
+0 Tw
+(Wales. )Tj
+0 -2.2 TD
+0.0041 Tc
+0.0414 Tw
+(The exam mark which contributes 60% of the weight)Tj
+0 -1.1 TD
+0.0258 Tc
+0.2581 Tw
+(to the final mark is omitted. This contributes a)Tj
+T*
+0.0382 Tc
+0.382 Tw
+(significant amount of noise to the data. The)Tj
+T*
+0.0114 Tc
+0.114 Tw
+(educational justification is the usefulness of a final)Tj
+T*
+0.0152 Tc
+0.152 Tw
+(mark predictor for students to use before the final)Tj
+T*
+0.007 Tc
+0.07 Tw
+(examination is attempted. We have trained a BDNN)Tj
+ET
+endstream
+endobj
+3 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT6 6 0 R
+/TT8 7 0 R
+>>
+/ExtGState <<
+/GS1 8 0 R
+>>
+>>
+endobj
+11 0 obj
+<<
+/Length 26849
+>>
+stream
+BT
+/TT4 1 Tf
+10 0 0 10 77 763 Tm
+0 g
+/GS1 gs
+0.0304 Tc
+0.3042 Tw
+(using 100 samples, while the other 53 unseen)Tj
+0 -1.1 TD
+0.0007 Tc
+0.0067 Tw
+(samples have been used to measure the generalisation)Tj
+T*
+0.0018 Tc
+0.0179 Tw
+(ability of the BDNN. )Tj
+0 -2.2 TD
+0.0275 Tc
+0.2752 Tw
+(We have also applied BDNNs to predict )Tj
+/TT8 1 Tf
+19.4 0 TD
+-0.0222 Tc
+0 Tw
+(Gross)Tj
+-19.4 -1.1 TD
+0.0003 Tc
+0.0031 Tw
+(National Product \(GNP\))Tj
+/TT4 1 Tf
+10 0 TD
+0.0111 Tc
+0.1108 Tw
+[( for most of the developing)]TJ
+-10 -1.1 TD
+0.013 Tc
+0.1302 Tw
+(countries in the world. The data set contains some)Tj
+T*
+0.0173 Tc
+0.1725 Tw
+(socio-economic information about 143 developing)Tj
+T*
+0.0248 Tc
+0.2476 Tw
+(countries from UNCTAD [18]. Each record has)Tj
+T*
+0.0339 Tc
+0.3393 Tw
+(fourteen attributes such as )Tj
+/TT8 1 Tf
+13.0251 0 TD
+0.0584 Tc
+0.5843 Tw
+(Total Population,)Tj
+-13.0251 -1.1 TD
+0.0012 Tc
+0.012 Tw
+(Education Illiteracy Rate, and Health Population Per)Tj
+T*
+0.0022 Tc
+0 Tw
+(Doctor.)Tj
+/TT4 1 Tf
+3.0984 0 TD
+0.0007 Tc
+0.0069 Tw
+[( We have separated the data into a training set)]TJ
+-3.0984 -1.1 TD
+-0.0008 Tc
+0 Tw
+(consisting of 100 records and a test set which contains)Tj
+T*
+0.0197 Tc
+0.1972 Tw
+(the remaining 43 records which will not be seen)Tj
+T*
+0.015 Tc
+0.1502 Tw
+(during training by the neural network. The output)Tj
+T*
+0.0192 Tc
+0.192 Tw
+(contains four classes: )Tj
+/TT8 1 Tf
+9.9 0 TD
+0.0179 Tc
+0.1794 Tw
+(Very Poor Countries, Poor)Tj
+-9.9 -1.1 TD
+0 Tc
+0 Tw
+(Countries, Middle Countries, and Rich Countries.)Tj
+/TT4 1 Tf
+0 -2.2 TD
+0.0294 Tc
+0.2936 Tw
+(The extraction of meaning from trained neural)Tj
+0 -1.1 TD
+-0.0008 Tc
+0 Tw
+(networks is seen as a way to improve the acceptability)Tj
+T*
+0.0131 Tc
+0.1307 Tw
+(of neural networks [19,7,16,1,3]. Most methods of)Tj
+T*
+0.0015 Tc
+0.0147 Tw
+(rule extraction use causal connections between inputs)Tj
+T*
+0.0067 Tc
+0.0673 Tw
+(and outputs. There is some statistical indication that)Tj
+T*
+0.0029 Tc
+0.0289 Tw
+(the outputs have causal effects on inputs. Thus, if we)Tj
+T*
+0.0016 Tc
+0.0157 Tw
+(were to explicitly allow connections embodded in the)Tj
+T*
+0.0153 Tc
+0.153 Tw
+(network to be made between the output and input)Tj
+T*
+0.0413 Tc
+0.4129 Tw
+(values as well as the usual input to output)Tj
+T*
+0.0124 Tc
+0.1237 Tw
+(connections, it is possible that more accurate rules)Tj
+T*
+-0.0121 Tc
+0 Tw
+(could be extracted. )Tj
+0 -2.2 TD
+0.0265 Tc
+0.2654 Tw
+(In the following sections we shall describe the)Tj
+0 -1.1 TD
+-0.0036 Tc
+0 Tw
+(training of BDNNs for two different tasks:)Tj
+T*
+-0.0093 Tc
+(a\) as a context addressable memory; and )Tj
+T*
+0.0002 Tc
+0.002 Tw
+(b\) to find the center of a cluster. )Tj
+0 -2.2 TD
+0.0499 Tc
+0.4987 Tw
+(Subsequently, we will demonstrate how an)Tj
+0 -1.1 TD
+0.0024 Tc
+0.0244 Tw
+(understanding of the behaviour of the network can be)Tj
+T*
+0.0253 Tc
+0.2529 Tw
+(obtained by investigating the properties of such)Tj
+T*
+0.0099 Tc
+0.0992 Tw
+(cluster centers. This will be done by examining the)Tj
+T*
+-0.0043 Tc
+0 Tw
+(class prototypes, comparing their representative values)Tj
+T*
+0.0251 Tc
+0.2511 Tw
+(and manually providing an interpretation of the)Tj
+T*
+-0.0044 Tc
+0 Tw
+(network behaviour.)Tj
+/TT2 1 Tf
+12 0 0 12 77 289 Tm
+0.0232 Tc
+0.2316 Tw
+[(2)-226.8(.)-393.5(Training BDNNs as Content)]TJ
+1.4167 -1 TD
+0.0298 Tc
+0.2983 Tw
+(Addressable Memories)Tj
+/TT4 1 Tf
+10 0 0 10 77 253 Tm
+0.018 Tc
+0.1795 Tw
+(For the purposes of this investigation it has been)Tj
+0 -1.1 TD
+0.0097 Tc
+0.097 Tw
+(assumed that a complete set of training data with a)Tj
+T*
+0.004 Tc
+0.0397 Tw
+(one-to-one relation between input and output vectors)Tj
+T*
+0.0416 Tc
+0.4165 Tw
+(is available. Otherwise, we would use some)Tj
+T*
+0.0074 Tc
+0.0739 Tw
+(preparation techniques as described in the following)Tj
+T*
+0.0089 Tc
+0.089 Tw
+(sections to create a one-to-one relationship between)Tj
+T*
+0.0031 Tc
+0.0307 Tw
+(them, with the premise that this is not done when the)Tj
+T*
+0.0316 Tc
+0.316 Tw
+(problem is inherently not appropriate for such)Tj
+T*
+0.0097 Tc
+0.097 Tw
+(transformations of the vector spaces. We have used)Tj
+T*
+-0.0008 Tc
+0 Tw
+(MLP networks with either one or two layers of hidden)Tj
+T*
+-0.009 Tc
+(layers for context addressable memories.)Tj
+/TT2 1 Tf
+0 -2.3 TD
+0.0347 Tc
+0.3474 Tw
+(2.1. Method of Training)Tj
+/TT4 1 Tf
+0 -2.2 TD
+-0.0033 Tc
+0 Tw
+(We have applied the error back-propagation technique)Tj
+0 -1.1 TD
+0.0066 Tc
+0.0663 Tw
+([14] in both reverse and forward directions to adjust)Tj
+T*
+0.0039 Tc
+0.0392 Tw
+(the weight matrix of the network. In our experiments)Tj
+23.3 68.7 TD
+0.0011 Tc
+0.0109 Tw
+(we did not need to use more hidden units in training a)Tj
+0 -1.1 TD
+0.0136 Tc
+0.1365 Tw
+(bidirectional network in comparison to the case of)Tj
+T*
+0.0154 Tc
+0.1538 Tw
+(training a network in the traditional unidirectional)Tj
+T*
+-0.0053 Tc
+0 Tw
+(way.)Tj
+0 -2.6 TD
+0.0218 Tc
+0.2178 Tw
+(When trained from left to right in Figure 1, the)Tj
+0 -1.1 TD
+0.0069 Tc
+0.069 Tw
+(weights on the connections between layers A and B,)Tj
+T*
+0.0011 Tc
+0.0112 Tw
+(and the weights between layers B and C are used. The)Tj
+T*
+0.0023 Tc
+0.0228 Tw
+(biases of layers B and C are also used. When training)Tj
+T*
+0.0055 Tc
+0.0554 Tw
+(in the reverse direction, the same weights between B)Tj
+T*
+-0.0031 Tc
+0 Tw
+(and C, and A and B, are used. The biases of neurons in)Tj
+T*
+0.0054 Tc
+0.0544 Tw
+(layer C are not used, and those of B and A are used.)Tj
+T*
+0.0045 Tc
+0.0454 Tw
+(Note that the same biases are used in layer B in both)Tj
+T*
+0.0017 Tc
+0.0168 Tw
+(directions. This would be the case for multiple hidden)Tj
+T*
+0 Tc
+0 Tw
+(layers also.)Tj
+ET
+q
+1 i 
+309 330 213 262 re
+W n
+1 g
+311 330 211 260 re
+f
+0 G
+0 J 0 j 1 w 10 M []0 d
+311.5 589.5 210 -259 re
+S
+Q
+1 g
+1 i 
+512 351.54 m
+512 346.296 489.6 342.04 462 342.04 c
+434.4 342.04 412 346.296 412 351.54 c
+412 356.784 434.4 361.04 462 361.04 c
+489.6 361.04 512 356.784 512 351.54 c
+f
+0 G
+0 J 0 j 1 w 10 M []0 d
+511.5 351.54 m
+511.5 346.572 489.324 342.54 462 342.54 c
+434.676 342.54 412.5 346.572 412.5 351.54 c
+412.5 356.508 434.676 360.54 462 360.54 c
+489.324 360.54 511.5 356.508 511.5 351.54 c
+s
+506.96 568.5 m
+506.96 563.256 482.544 559 452.46 559 c
+422.376 559 397.96 563.256 397.96 568.5 c
+397.96 573.744 422.376 578 452.46 578 c
+482.544 578 506.96 573.744 506.96 568.5 c
+f
+506.46 568.5 m
+506.46 563.532 482.268 559.5 452.46 559.5 c
+422.652 559.5 398.46 563.532 398.46 568.5 c
+398.46 573.468 422.652 577.5 452.46 577.5 c
+482.268 577.5 506.46 573.468 506.46 568.5 c
+s
+0.5 g
+352.02 526.98 m
+352.02 522.012 347.988 517.98 343.02 517.98 c
+338.052 517.98 334.02 522.012 334.02 526.98 c
+334.02 531.948 338.052 535.98 343.02 535.98 c
+347.988 535.98 352.02 531.948 352.02 526.98 c
+f
+0.5 w 
+351.52 526.98 m
+351.52 522.288 347.712 518.48 343.02 518.48 c
+338.328 518.48 334.52 522.288 334.52 526.98 c
+334.52 531.672 338.328 535.48 343.02 535.48 c
+347.712 535.48 351.52 531.672 351.52 526.98 c
+s
+0 g
+433.02 445.98 m
+433.02 441.012 428.988 436.98 424.02 436.98 c
+419.052 436.98 415.02 441.012 415.02 445.98 c
+415.02 450.948 419.052 454.98 424.02 454.98 c
+428.988 454.98 433.02 450.948 433.02 445.98 c
+f
+432.52 445.98 m
+432.52 441.288 428.712 437.48 424.02 437.48 c
+419.328 437.48 415.52 441.288 415.52 445.98 c
+415.52 450.672 419.328 454.48 424.02 454.48 c
+428.712 454.48 432.52 450.672 432.52 445.98 c
+s
+433.02 499.98 m
+433.02 495.012 428.988 490.98 424.02 490.98 c
+419.052 490.98 415.02 495.012 415.02 499.98 c
+415.02 504.948 419.052 508.98 424.02 508.98 c
+428.988 508.98 433.02 504.948 433.02 499.98 c
+f
+432.52 499.98 m
+432.52 495.288 428.712 491.48 424.02 491.48 c
+419.328 491.48 415.52 495.288 415.52 499.98 c
+415.52 504.672 419.328 508.48 424.02 508.48 c
+428.712 508.48 432.52 504.672 432.52 499.98 c
+s
+0.5 g
+494.94 418.98 m
+494.94 414.012 490.908 409.98 485.94 409.98 c
+480.972 409.98 476.94 414.012 476.94 418.98 c
+476.94 423.948 480.972 427.98 485.94 427.98 c
+490.908 427.98 494.94 423.948 494.94 418.98 c
+f
+494.5 418.98 m
+494.5 414.288 490.692 410.48 486 410.48 c
+481.308 410.48 477.5 414.288 477.5 418.98 c
+477.5 423.672 481.308 427.48 486 427.48 c
+490.692 427.48 494.5 423.672 494.5 418.98 c
+s
+494.94 487.98 m
+494.94 483.012 490.908 478.98 485.94 478.98 c
+480.972 478.98 476.94 483.012 476.94 487.98 c
+476.94 492.948 480.972 496.98 485.94 496.98 c
+490.908 496.98 494.94 492.948 494.94 487.98 c
+f
+494.5 487.98 m
+494.5 483.288 490.692 479.48 486 479.48 c
+481.308 479.48 477.5 483.288 477.5 487.98 c
+477.5 492.672 481.308 496.48 486 496.48 c
+490.692 496.48 494.5 492.672 494.5 487.98 c
+s
+494.94 529.02 m
+494.94 524.052 490.908 520.02 485.94 520.02 c
+480.972 520.02 476.94 524.052 476.94 529.02 c
+476.94 533.988 480.972 538.02 485.94 538.02 c
+490.908 538.02 494.94 533.988 494.94 529.02 c
+f
+494.5 529.02 m
+494.5 524.328 490.692 520.52 486 520.52 c
+481.308 520.52 477.5 524.328 477.5 529.02 c
+477.5 533.712 481.308 537.52 486 537.52 c
+490.692 537.52 494.5 533.712 494.5 529.02 c
+s
+352.02 418.98 m
+352.02 414.012 347.988 409.98 343.02 409.98 c
+338.052 409.98 334.02 414.012 334.02 418.98 c
+334.02 423.948 338.052 427.98 343.02 427.98 c
+347.988 427.98 352.02 423.948 352.02 418.98 c
+f
+351.52 418.98 m
+351.52 414.288 347.712 410.48 343.02 410.48 c
+338.328 410.48 334.52 414.288 334.52 418.98 c
+334.52 423.672 338.328 427.48 343.02 427.48 c
+347.712 427.48 351.52 423.672 351.52 418.98 c
+s
+352.02 490.98 m
+352.02 486.012 347.988 481.98 343.02 481.98 c
+338.052 481.98 334.02 486.012 334.02 490.98 c
+334.02 495.948 338.052 499.98 343.02 499.98 c
+347.988 499.98 352.02 495.948 352.02 490.98 c
+f
+351.52 490.98 m
+351.52 486.288 347.712 482.48 343.02 482.48 c
+338.328 482.48 334.52 486.288 334.52 490.98 c
+334.52 495.672 338.328 499.48 343.02 499.48 c
+347.712 499.48 351.52 495.672 351.52 490.98 c
+s
+1 g
+346 455.46 m
+346 454.08 344.88 452.96 343.5 452.96 c
+342.12 452.96 341 454.08 341 455.46 c
+341 456.84 342.12 457.96 343.5 457.96 c
+344.88 457.96 346 456.84 346 455.46 c
+f
+345.5 455.52 m
+345.5 454.416 344.604 453.52 343.5 453.52 c
+342.396 453.52 341.5 454.416 341.5 455.52 c
+341.5 456.624 342.396 457.52 343.5 457.52 c
+344.604 457.52 345.5 456.624 345.5 455.52 c
+s
+487.96 461.46 m
+487.96 460.08 486.84 458.96 485.46 458.96 c
+484.08 458.96 482.96 460.08 482.96 461.46 c
+482.96 462.84 484.08 463.96 485.46 463.96 c
+486.84 463.96 487.96 462.84 487.96 461.46 c
+f
+487.52 461.52 m
+487.52 460.416 486.624 459.52 485.52 459.52 c
+484.416 459.52 483.52 460.416 483.52 461.52 c
+483.52 462.624 484.416 463.52 485.52 463.52 c
+486.624 463.52 487.52 462.624 487.52 461.52 c
+s
+424.96 482.46 m
+424.96 481.08 423.84 479.96 422.46 479.96 c
+421.08 479.96 419.96 481.08 419.96 482.46 c
+419.96 483.84 421.08 484.96 422.46 484.96 c
+423.84 484.96 424.96 483.84 424.96 482.46 c
+f
+424.52 482.52 m
+424.52 481.416 423.624 480.52 422.52 480.52 c
+421.416 480.52 420.52 481.416 420.52 482.52 c
+420.52 483.624 421.416 484.52 422.52 484.52 c
+423.624 484.52 424.52 483.624 424.52 482.52 c
+s
+424.96 464.46 m
+424.96 463.08 423.84 461.96 422.46 461.96 c
+421.08 461.96 419.96 463.08 419.96 464.46 c
+419.96 465.84 421.08 466.96 422.46 466.96 c
+423.84 466.96 424.96 465.84 424.96 464.46 c
+f
+424.52 464.52 m
+424.52 463.416 423.624 462.52 422.52 462.52 c
+421.416 462.52 420.52 463.416 420.52 464.52 c
+420.52 465.624 421.416 466.52 422.52 466.52 c
+423.624 466.52 424.52 465.624 424.52 464.52 c
+s
+424.96 473.46 m
+424.96 472.08 423.84 470.96 422.46 470.96 c
+421.08 470.96 419.96 472.08 419.96 473.46 c
+419.96 474.84 421.08 475.96 422.46 475.96 c
+423.84 475.96 424.96 474.84 424.96 473.46 c
+f
+424.52 473.52 m
+424.52 472.416 423.624 471.52 422.52 471.52 c
+421.416 471.52 420.52 472.416 420.52 473.52 c
+420.52 474.624 421.416 475.52 422.52 475.52 c
+423.624 475.52 424.52 474.624 424.52 473.52 c
+s
+346 470.46 m
+346 469.08 344.88 467.96 343.5 467.96 c
+342.12 467.96 341 469.08 341 470.46 c
+341 471.84 342.12 472.96 343.5 472.96 c
+344.88 472.96 346 471.84 346 470.46 c
+f
+345.5 470.52 m
+345.5 469.416 344.604 468.52 343.5 468.52 c
+342.396 468.52 341.5 469.416 341.5 470.52 c
+341.5 471.624 342.396 472.52 343.5 472.52 c
+344.604 472.52 345.5 471.624 345.5 470.52 c
+s
+487.96 470.46 m
+487.96 469.08 486.84 467.96 485.46 467.96 c
+484.08 467.96 482.96 469.08 482.96 470.46 c
+482.96 471.84 484.08 472.96 485.46 472.96 c
+486.84 472.96 487.96 471.84 487.96 470.46 c
+f
+487.52 470.52 m
+487.52 469.416 486.624 468.52 485.52 468.52 c
+484.416 468.52 483.52 469.416 483.52 470.52 c
+483.52 471.624 484.416 472.52 485.52 472.52 c
+486.624 472.52 487.52 471.624 487.52 470.52 c
+s
+0 g
+477 527 m
+465 518 l
+464 521 l
+462 524 l
+477 527 l
+f*
+471 522.5 m
+466.993 519.505 465 518 y
+464.826 518.505 464.5 519.5 v
+464.16 520.505 464 521 y
+463.66 521.505 463 522.5 v
+462.326 523.505 462 524 y
+464.493 524.505 469.5 525.5 v
+474.493 526.505 477 527 y
+474.993 525.505 471 522.5 v
+f*
+432 505 m
+443 515 l
+444 512 l
+446 509 l
+432 505 l
+f*
+437.5 510 m
+441.16 513.338 443 515 y
+443.16 514.505 443.5 513.5 v
+443.827 512.505 444 512 y
+444.327 511.505 445 510.5 v
+445.66 509.505 446 509 y
+443.66 508.338 439 507 v
+434.327 505.672 432 505 y
+433.827 506.672 437.5 510 v
+f*
+464 521 m
+465 521 l
+465 520 l
+445 511 l
+444 511 l
+444 512 l
+f
+480 427 m
+468 437 l
+474 441 l
+480 427 l
+f*
+474 432 m
+469.993 435.339 468 437 y
+468.493 437.339 469.5 438 v
+470.493 438.673 471 439 y
+471.493 439.339 472.5 440 v
+473.493 440.673 474 441 y
+474.993 438.673 477 434 v
+478.993 429.339 480 427 y
+477.993 428.673 474 432 v
+f*
+429 493 m
+440 484 l
+438 482 l
+435 480 l
+429 493 l
+f*
+434.5 488.5 m
+438.16 485.505 440 484 y
+439.66 483.672 439 483 v
+438.327 482.339 438 482 y
+437.494 481.672 436.5 481 v
+435.494 480.339 435 480 y
+433.994 482.172 432 486.5 v
+429.994 490.839 429 493 y
+430.827 491.505 434.5 488.5 v
+f*
+438 482 m
+439 482 l
+472 439 l
+472 438 l
+471 438 l
+438 481 l
+f
+429 454 m
+434 468 l
+440 464 l
+429 454 l
+f*
+431.5 461 m
+433.16 465.672 434 468 y
+434.494 467.672 435.5 467 v
+436.494 466.339 437 466 y
+437.493 465.672 438.5 465 v
+439.494 464.339 440 464 y
+438.16 462.339 434.5 459 v
+430.827 455.672 429 454 y
+429.827 456.339 431.5 461 v
+f*
+479 523 m
+474 510 l
+468 514 l
+479 523 l
+f*
+476.5 516.5 m
+474.826 512.171 474 510 y
+473.493 510.338 472.5 511 v
+471.493 511.672 471 512 y
+470.493 512.338 469.5 513 v
+468.493 513.672 468 514 y
+469.826 515.505 473.5 518.5 v
+477.16 521.505 479 523 y
+478.16 520.838 476.5 516.5 v
+f*
+471 512 m
+472 512 l
+472 511 l
+438 465 l
+437 465 l
+437 466 l
+f
+432 451 m
+441 462 l
+445 456 l
+432 451 l
+f*
+436.5 456.5 m
+439.494 460.172 441 462 y
+441.327 461.506 442 460.5 v
+442.66 459.506 443 459 y
+443.327 458.506 444 457.5 v
+444.66 456.506 445 456 y
+442.827 455.172 438.5 453.5 v
+434.16 451.839 432 451 y
+433.494 452.839 436.5 456.5 v
+f*
+478 484 m
+469 473 l
+467 476 l
+464 479 l
+478 484 l
+f*
+473.5 478.5 m
+470.493 474.839 469 473 y
+468.66 473.505 468 474.5 v
+467.326 475.505 467 476 y
+466.493 476.505 465.5 477.5 v
+464.493 478.505 464 479 y
+466.326 479.839 471 481.5 v
+475.66 483.172 478 484 y
+476.493 482.172 473.5 478.5 v
+f*
+467 476 m
+468 476 l
+468 475 l
+444 458 l
+443 458 l
+443 459 l
+f
+431 442 m
+445 440 l
+444 436 l
+443 433 l
+431 442 l
+f*
+438 441 m
+442.66 440.339 445 440 y
+444.827 439.339 444.5 438 v
+444.16 436.673 444 436 y
+443.827 435.506 443.5 434.5 v
+443.16 433.506 443 433 y
+440.994 434.506 437 437.5 v
+432.993 440.506 431 442 y
+433.327 441.673 438 441 v
+f*
+476 422 m
+462 425 l
+464 431 l
+476 422 l
+f*
+469 423.5 m
+464.326 424.506 462 425 y
+462.16 425.506 462.5 426.5 v
+462.826 427.506 463 428 y
+463.16 428.506 463.5 429.5 v
+463.826 430.506 464 431 y
+465.993 429.506 470 426.5 v
+473.993 423.506 476 422 y
+473.66 422.506 469 423.5 v
+f*
+444 436 m
+445 436 l
+464 428 l
+464 427 l
+463 427 l
+444 435 l
+f
+1 g
+346 442.5 m
+346 441.12 344.88 440 343.5 440 c
+342.12 440 341 441.12 341 442.5 c
+341 443.88 342.12 445 343.5 445 c
+344.88 445 346 443.88 346 442.5 c
+f
+345.5 442.5 m
+345.5 441.396 344.604 440.5 343.5 440.5 c
+342.396 440.5 341.5 441.396 341.5 442.5 c
+341.5 443.604 342.396 444.5 343.5 444.5 c
+344.604 444.5 345.5 443.604 345.5 442.5 c
+s
+487.96 450.48 m
+487.96 449.1 486.84 447.98 485.46 447.98 c
+484.08 447.98 482.96 449.1 482.96 450.48 c
+482.96 451.86 484.08 452.98 485.46 452.98 c
+486.84 452.98 487.96 451.86 487.96 450.48 c
+f
+487.52 450.48 m
+487.52 449.376 486.624 448.48 485.52 448.48 c
+484.416 448.48 483.52 449.376 483.52 450.48 c
+483.52 451.584 484.416 452.48 485.52 452.48 c
+486.624 452.48 487.52 451.584 487.52 450.48 c
+s
+0 g
+432 500 m
+446 501 l
+445 497 l
+444 494 l
+432 500 l
+f*
+439 500.5 m
+443.66 500.838 446 501 y
+445.827 500.338 445.5 499 v
+445.16 497.672 445 497 y
+444.827 496.505 444.5 495.5 v
+444.16 494.505 444 494 y
+441.994 495.005 438 497 v
+433.993 499.005 432 500 y
+434.327 500.172 439 500.5 v
+f*
+477 490 m
+462 490 l
+463 494 l
+464 497 l
+477 490 l
+f*
+469.5 490 m
+464.493 490 462 490 y
+462.16 490.672 462.5 492 v
+462.826 493.339 463 494 y
+463.16 494.505 463.5 495.5 v
+463.826 496.505 464 497 y
+466.16 495.838 470.5 493.5 v
+474.826 491.172 477 490 y
+474.493 490 469.5 490 v
+f*
+445 497 m
+446 497 l
+464 494 l
+464 493 l
+463 493 l
+445 496 l
+f
+415 450 m
+400 454 l
+404 460 l
+415 450 l
+f*
+407.5 452 m
+402.494 453.339 400 454 y
+400.327 454.506 401 455.5 v
+401.661 456.506 402 457 y
+402.327 457.506 403 458.5 v
+403.661 459.506 404 460 y
+405.827 458.339 409.5 455 v
+413.161 451.672 415 450 y
+412.494 450.672 407.5 452 v
+f*
+350 485 m
+364 482 l
+360 476 l
+350 485 l
+f*
+357 483.5 m
+361.661 482.505 364 482 y
+363.661 481.505 363 480.5 v
+362.328 479.505 362 479 y
+361.661 478.505 361 477.5 v
+360.328 476.505 360 476 y
+358.328 477.505 355 480.5 v
+351.661 483.505 350 485 y
+352.328 484.505 357 483.5 v
+f*
+362 479 m
+363 479 l
+403 457 l
+403 456 l
+402 456 l
+362 478 l
+f
+347 520 m
+360 513 l
+357 511 l
+355 508 l
+347 520 l
+f*
+353.5 516.5 m
+357.828 514.171 360 513 y
+359.495 512.672 358.5 512 v
+357.495 511.338 357 511 y
+356.661 510.505 356 509.5 v
+355.328 508.505 355 508 y
+353.662 510.005 351 514 v
+348.328 518.005 347 520 y
+349.161 518.838 353.5 516.5 v
+f*
+418 454 m
+405 461 l
+410 466 l
+418 454 l
+f*
+411.5 457.5 m
+407.161 459.839 405 461 y
+405.494 461.506 406.5 462.5 v
+407.494 463.506 408 464 y
+408.327 464.339 409 465 v
+409.661 465.672 410 466 y
+411.327 464.006 414 460 v
+416.661 456.006 418 454 y
+415.827 455.172 411.5 457.5 v
+f*
+357 511 m
+358 511 l
+409 464 l
+409 463 l
+408 463 l
+357 510 l
+f
+351 491 m
+364 497 l
+364 493 l
+365 490 l
+351 491 l
+f*
+357.5 494 m
+361.828 496.005 364 497 y
+364 496.338 364 495 v
+364 493.672 364 493 y
+364.161 492.505 364.5 491.5 v
+364.828 490.505 365 490 y
+362.661 490.172 358 490.5 v
+353.328 490.839 351 491 y
+353.161 492.005 357.5 494 v
+f*
+415 500 m
+401 495 l
+401 499 l
+400 502 l
+415 500 l
+f*
+408 497.5 m
+403.327 495.838 401 495 y
+401 495.672 401 497 v
+401 498.338 401 499 y
+400.827 499.505 400.5 500.5 v
+400.161 501.505 400 502 y
+402.494 501.672 407.5 501 v
+412.494 500.338 415 500 y
+412.661 499.172 408 497.5 v
+f*
+401 499 m
+402 499 l
+402 498 l
+365 492 l
+364 492 l
+364 493 l
+f
+350 524 m
+365 523 l
+363 517 l
+350 524 l
+f*
+357.5 523.5 m
+362.495 523.171 365 523 y
+364.828 522.505 364.5 521.5 v
+364.161 520.505 364 520 y
+363.828 519.505 363.5 518.5 v
+363.161 517.505 363 517 y
+360.828 518.171 356.5 520.5 v
+352.161 522.838 350 524 y
+352.495 523.838 357.5 523.5 v
+f*
+415 505 m
+400 506 l
+402 512 l
+415 505 l
+f*
+407.5 505.5 m
+402.494 505.838 400 506 y
+400.161 506.505 400.5 507.5 v
+400.827 508.505 401 509 y
+401.161 509.505 401.5 510.5 v
+401.827 511.505 402 512 y
+404.161 510.838 408.5 508.5 v
+412.827 506.172 415 505 y
+412.494 505.172 407.5 505.5 v
+f*
+364 520 m
+365 520 l
+402 509 l
+402 508 l
+401 508 l
+364 519 l
+f
+350 425 m
+357 438 l
+360 436 l
+362 433 l
+350 425 l
+f*
+353.5 431.5 m
+355.828 435.839 357 438 y
+357.495 437.673 358.5 437 v
+359.495 436.339 360 436 y
+360.328 435.506 361 434.5 v
+361.661 433.506 362 433 y
+359.995 431.673 356 429 v
+351.995 426.339 350 425 y
+351.161 427.173 353.5 431.5 v
+f*
+418 494 m
+410 481 l
+408 484 l
+405 486 l
+418 494 l
+f*
+414 487.5 m
+411.327 483.172 410 481 y
+409.661 481.505 409 482.5 v
+408.327 483.505 408 484 y
+407.494 484.339 406.5 485 v
+405.494 485.672 405 486 y
+407.161 487.339 411.5 490 v
+415.827 492.672 418 494 y
+416.661 491.839 414 487.5 v
+f*
+408 484 m
+409 484 l
+409 483 l
+361 435 l
+360 435 l
+360 436 l
+f
+415 444 m
+402 436 l
+401 440 l
+400 443 l
+415 444 l
+f*
+408.5 440 m
+404.161 437.339 402 436 y
+401.827 436.673 401.5 438 v
+401.161 439.339 401 440 y
+400.827 440.506 400.5 441.5 v
+400.161 442.506 400 443 y
+402.494 443.173 407.5 443.5 v
+412.494 443.839 415 444 y
+412.827 442.673 408.5 440 v
+f*
+352 422 m
+364 430 l
+365 427 l
+366 423 l
+352 422 l
+f*
+358 426 m
+361.995 428.673 364 430 y
+364.161 429.506 364.5 428.5 v
+364.828 427.506 365 427 y
+365.161 426.34 365.5 425 v
+365.828 423.673 366 423 y
+363.661 422.84 359 422.5 v
+354.328 422.173 352 422 y
+353.995 423.339 358 426 v
+f*
+401 440 m
+402 440 l
+402 439 l
+366 426 l
+365 426 l
+365 427 l
+f
+423 509 m
+419 518 l
+428 518 l
+423 509 l
+f*
+1 g
+421 513.5 m
+419.66 516.505 419 518 y
+420.494 518 423.5 518 v
+426.494 518 428 518 y
+427.16 516.505 425.5 513.5 v
+423.827 510.505 423 509 y
+422.327 510.505 421 513.5 v
+f*
+423 438 m
+428 429 l
+419 429 l
+423 438 l
+f*
+425.5 433.5 m
+427.16 430.506 428 429 y
+426.494 429 423.5 429 v
+420.494 429 419 429 y
+419.66 430.506 421 433.5 v
+422.327 436.506 423 438 y
+423.827 436.506 425.5 433.5 v
+f*
+434 391.5 m
+434 386.256 429.744 382 424.5 382 c
+419.256 382 415 386.256 415 391.5 c
+415 396.744 419.256 401 424.5 401 c
+429.744 401 434 396.744 434 391.5 c
+f
+1 w 
+433.5 391.5 m
+433.5 386.532 429.468 382.5 424.5 382.5 c
+419.532 382.5 415.5 386.532 415.5 391.5 c
+415.5 396.468 419.532 400.5 424.5 400.5 c
+429.468 400.5 433.5 396.468 433.5 391.5 c
+s
+0 g
+481 481 m
+476 467 l
+470 471 l
+481 481 l
+f*
+478.5 474 m
+476.826 469.339 476 467 y
+475.493 467.339 474.5 468 v
+473.493 468.672 473 469 y
+472.493 469.339 471.5 470 v
+470.493 470.672 470 471 y
+471.826 472.672 475.5 476 v
+479.16 479.339 481 481 y
+480.16 478.672 478.5 474 v
+f*
+473 469 m
+474 469 l
+474 468 l
+430 399 l
+429 399 l
+429 400 l
+f
+481 522 m
+478 508 l
+475 509 l
+472 511 l
+481 522 l
+f*
+479.5 515 m
+478.493 510.338 478 508 y
+477.493 508.172 476.5 508.5 v
+475.493 508.838 475 509 y
+474.493 509.338 473.5 510 v
+472.493 510.672 472 511 y
+473.493 512.838 476.5 516.5 v
+479.493 520.171 481 522 y
+480.493 519.672 479.5 515 v
+f*
+475 509 m
+476 509 l
+476 508 l
+428 401 l
+427 401 l
+427 402 l
+f
+477 417 m
+465 408 l
+464 411 l
+462 414 l
+477 417 l
+f*
+471 412.5 m
+466.993 409.506 465 408 y
+464.826 408.506 464.5 409.5 v
+464.16 410.506 464 411 y
+463.66 411.506 463 412.5 v
+462.326 413.506 462 414 y
+464.493 414.506 469.5 415.5 v
+474.493 416.506 477 417 y
+474.993 415.506 471 412.5 v
+f*
+464 411 m
+465 411 l
+465 410 l
+433 395 l
+432 395 l
+432 396 l
+f
+1 g
+434 534.48 m
+434 529.236 429.744 524.98 424.5 524.98 c
+419.256 524.98 415 529.236 415 534.48 c
+415 539.724 419.256 543.98 424.5 543.98 c
+429.744 543.98 434 539.724 434 534.48 c
+f
+433.5 534.54 m
+433.5 529.572 429.468 525.54 424.5 525.54 c
+419.532 525.54 415.5 529.572 415.5 534.54 c
+415.5 539.508 419.532 543.54 424.5 543.54 c
+429.468 543.54 433.5 539.508 433.5 534.54 c
+s
+0 g
+347 428 m
+352 442 l
+358 438 l
+347 428 l
+f*
+349.5 435 m
+351.162 439.673 352 442 y
+352.495 441.673 353.5 441 v
+354.495 440.339 355 440 y
+355.495 439.673 356.5 439 v
+357.495 438.339 358 438 y
+356.162 436.339 352.5 433 v
+348.828 429.673 347 428 y
+347.828 430.339 349.5 435 v
+f*
+418 528 m
+419 528 l
+419 527 l
+356 439 l
+355 439 l
+355 440 l
+f
+350 497 m
+360 507 l
+362 503 l
+364 500 l
+350 497 l
+f*
+355 502 m
+358.328 505.338 360 507 y
+360.328 506.338 361 505 v
+361.661 503.672 362 503 y
+362.328 502.505 363 501.5 v
+363.661 500.505 364 500 y
+361.661 499.505 357 498.5 v
+352.328 497.505 350 497 y
+351.661 498.672 355 502 v
+f*
+415 531 m
+416 531 l
+416 530 l
+363 502 l
+362 502 l
+362 503 l
+f
+352 528 m
+365 533 l
+366 530 l
+366 526 l
+352 528 l
+f*
+358.5 530.5 m
+362.828 532.171 365 533 y
+365.161 532.505 365.5 531.5 v
+365.828 530.505 366 530 y
+366 529.338 366 528 v
+366 526.671 366 526 y
+363.661 526.338 359 527 v
+354.328 527.671 352 528 y
+354.161 528.838 358.5 530.5 v
+f*
+415 534 m
+416 534 l
+416 533 l
+367 529 l
+366 529 l
+366 530 l
+f
+BT
+8 0 0 8 437 567 Tm
+-0.0015 Tc
+(Input Bias)Tj
+0.75 -27.125 TD
+-0.0055 Tc
+(Output Bias)Tj
+ET
+439 559 m
+426 545 l
+459 558 l
+458 558 l
+439 559 l
+f*
+1 g
+432.5 552 m
+428.16 547.338 426 545 y
+431.493 547.171 442.5 551.5 v
+453.494 555.838 459 558 y
+458.827 558 458.5 558 v
+458.16 558 458 558 y
+454.827 558.171 448.5 558.5 v
+442.16 558.837 439 559 y
+436.827 556.671 432.5 552 v
+f*
+443 560 m
+428 545 l
+461 560 l
+f*
+443 560 m
+432.994 550.004 428 545 y
+433.493 547.504 444.5 552.5 v
+455.493 557.504 461 560 y
+B*
+0 g
+448 361 m
+429 385 l
+466 361 l
+448 361 l
+f*
+1 g
+438.5 373 m
+432.16 381.007 429 385 y
+435.16 381.007 447.5 373 v
+459.827 365.007 466 361 y
+462.993 361 457 361 v
+450.993 361 448 361 y
+444.827 365.007 438.5 373 v
+f*
+451 361 m
+432 384 l
+469 361 l
+f*
+451 361 m
+438.327 376.34 432 384 y
+438.16 380.174 450.5 372.5 v
+462.827 364.84 469 361 y
+B*
+0 g
+354 379 m
+423 428 l
+378 379 l
+354 379 l
+f*
+1 g
+388.5 403.5 m
+411.494 419.84 423 428 y
+415.494 419.84 400.5 403.5 v
+385.494 387.173 378 379 y
+373.995 379 366 379 v
+357.995 379 354 379 y
+365.494 387.173 388.5 403.5 v
+f*
+460 365 m
+472 358 l
+455 358 l
+450 364 l
+f*
+1 G
+460 365 m
+467.993 360.341 472 358 y
+469.16 358 463.5 358 v
+457.826 358 455 358 y
+454.16 359.007 452.5 361 v
+450.827 363.007 450 364 y
+B*
+452 557 m
+464 562 l
+447 562 l
+441 557 l
+f*
+452 557 m
+459.993 560.337 464 562 y
+461.16 562 455.5 562 v
+449.827 562 447 562 y
+445.993 561.171 444 559.5 v
+441.993 557.837 441 557 y
+B*
+BT
+8 0 0 8 311 316 Tm
+0 g
+0.0016 Tc
+0.0169 Tw
+(Figure 1. BDNN Topology \(hidden biases not shown\))Tj
+10 0 0 10 310 294 Tm
+0.0174 Tc
+0.174 Tw
+(Due to a flatter search space, sometimes a higher)Tj
+0 -1.1 TD
+-0.0021 Tc
+0 Tw
+(number of epochs may be necessary for the network to)Tj
+T*
+0.0089 Tc
+0.0893 Tw
+(converge in comparison to traditional unidirectional)Tj
+T*
+0.0045 Tc
+0.0453 Tw
+(networks. The remaining challenge is the case where)Tj
+T*
+0.0368 Tc
+0.3679 Tw
+(the function relating inputs to outputs is not)Tj
+T*
+0.0038 Tc
+0.0376 Tw
+(invertible, or there is a relation which is many-to-one)Tj
+T*
+0.0125 Tc
+0.1249 Tw
+(between inputs and outputs. In the next section we)Tj
+T*
+-0.0014 Tc
+0 Tw
+(shall use some statistical techniques to create a one-to-)Tj
+T*
+0.0015 Tc
+0.0146 Tw
+(one relationship between input and output vectors if it)Tj
+T*
+0.0245 Tc
+0.2448 Tw
+(is meaningful in the domain, allowing our two-)Tj
+T*
+-0.0073 Tc
+0 Tw
+(directional training to proceed.)Tj
+/TT2 1 Tf
+12 0 0 12 310 162 Tm
+0.0222 Tc
+0.222 Tw
+[(3)-227.8(.)-311.1(Implementation and experiments)]TJ
+/TT4 1 Tf
+10 0 0 10 310 138 Tm
+0.0083 Tc
+0.0833 Tw
+(To implement our technique, some issues should be)Tj
+T*
+0.0139 Tc
+0.1388 Tw
+(addressed. The first of these is invertibility. When)Tj
+T*
+0.0231 Tc
+0.2308 Tw
+(quantities are related to each other in a specific)Tj
+T*
+0.003 Tc
+0.0303 Tw
+(numerical way, we use the mathematical concept of a)Tj
+T*
+0.0302 Tc
+0.3021 Tw
+(function to unify them. By the definition of a)Tj
+T*
+0.0011 Tc
+0.0115 Tw
+(function, we mean that each element in )Tj
+/TT8 1 Tf
+16.0614 0 TD
+0 Tc
+0 Tw
+(A)Tj
+/TT4 1 Tf
+0.6108 0 TD
+0.0009 Tc
+0.0095 Tw
+[( \( domain\) is)]TJ
+ET
+endstream
+endobj
+12 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT8 7 0 R
+>>
+/ExtGState <<
+/GS1 8 0 R
+>>
+>>
+endobj
+14 0 obj
+<<
+/Length 16414
+>>
+stream
+BT
+/TT4 1 Tf
+10 0 0 10 77 763 Tm
+0 g
+/GS1 gs
+0.0195 Tc
+0.1948 Tw
+(mapped into precisely one element in )Tj
+/TT8 1 Tf
+17.1076 0 TD
+0 Tc
+0 Tw
+(B)Tj
+/TT4 1 Tf
+0.6867 0 TD
+0.0234 Tc
+0.2336 Tw
+[( \(range\).)]TJ
+-17.7943 -1.1 TD
+0.0064 Tc
+0.0644 Tw
+(Therefore we can define )Tj
+/TT8 1 Tf
+10.4049 0 TD
+0.0024 Tc
+0.0235 Tw
+(f ')Tj
+/TT4 1 Tf
+0.7724 0 TD
+0.0056 Tc
+0.0558 Tw
+[( \(inverse of function )]TJ
+/TT8 1 Tf
+8.7326 0 TD
+0 Tc
+0 Tw
+(f)Tj
+/TT4 1 Tf
+0.2893 0 TD
+0.0025 Tc
+0.0248 Tw
+[( \) if)]TJ
+-20.1992 -1.1 TD
+0.0273 Tc
+0.2726 Tw
+(and only if )Tj
+/TT8 1 Tf
+5.8 0 TD
+0 Tc
+0 Tw
+(f)Tj
+/TT4 1 Tf
+0.315 0 TD
+0.0222 Tc
+0.2218 Tw
+[( is a one-to-one \(not many-to-one\))]TJ
+-6.115 -1.1 TD
+0.0365 Tc
+0.3652 Tw
+(function. In the implementation of BDNN as)Tj
+T*
+0.0068 Tc
+0.0679 Tw
+(associative memories we must address how to solve)Tj
+T*
+0.0022 Tc
+0.0223 Tw
+(this problem. In many cases neural networks are used)Tj
+T*
+0.0023 Tc
+0.0231 Tw
+(to map many input patterns to one output pattern \(eg.)Tj
+T*
+0.0033 Tc
+0.0326 Tw
+(OR, XOR, Loan, and so on\). )Tj
+0 -2.2 TD
+0.0005 Tc
+0.0052 Tw
+(Two techniques have been used to solve this problem.)Tj
+0 -1.1 TD
+-0.0038 Tc
+0 Tw
+(In the first technique, we manipulated the training data)Tj
+T*
+0.0013 Tc
+0.0133 Tw
+(to make the data suitable \(one-to-one\) for input to the)Tj
+T*
+0.0434 Tc
+0.4342 Tw
+(BDNN. Using statistical techniques for data)Tj
+T*
+0.0193 Tc
+0.1926 Tw
+(preparation to increase the generalisation and the)Tj
+T*
+0.002 Tc
+0.0203 Tw
+(reliability of neural networks have been suggested by)Tj
+T*
+-0.0136 Tc
+0 Tw
+(many researchers.)Tj
+0 -2.2 TD
+0.0039 Tc
+0.039 Tw
+(It should also be noted that we do not suggest useing)Tj
+0 -1.1 TD
+0.0035 Tc
+0.0346 Tw
+(bidirectional neural networks for classes of problems)Tj
+T*
+0.008 Tc
+0.08 Tw
+(which are inherently not invertible. For example, to)Tj
+T*
+0.01 Tc
+0.0998 Tw
+(put all the people who are authorised for by a loan)Tj
+T*
+0.0034 Tc
+0.0341 Tw
+(authorisation network in one class. Since the result is)Tj
+T*
+0.0005 Tc
+0 Tw
+(a )Tj
+/TT8 1 Tf
+0.7003 0 TD
+0.0012 Tc
+('yes' )Tj
+/TT4 1 Tf
+1.9734 0 TD
+0.0007 Tc
+0.0067 Tw
+(or a )Tj
+/TT8 1 Tf
+1.7938 0 TD
+0.0011 Tc
+0 Tw
+('no' )Tj
+/TT4 1 Tf
+1.6938 0 TD
+0.0012 Tc
+0.0118 Tw
+(we can not expect to map )Tj
+/TT8 1 Tf
+10.6387 0 TD
+0.0036 Tc
+0 Tw
+('yes' )Tj
+/TT4 1 Tf
+2.0121 0 TD
+0.0052 Tc
+0.0516 Tw
+(to only)Tj
+-18.8121 -1.1 TD
+0.0062 Tc
+0.0616 Tw
+(a single input pattern. In the second technique, extra)Tj
+T*
+0.0008 Tc
+0.0084 Tw
+(outputs have been used in the output layer.)Tj
+/TT2 1 Tf
+12 0 0 12 77 476 Tm
+0.026 Tc
+0.2597 Tw
+[(4)-224(.)-390.7(Experimental results)]TJ
+/TT4 1 Tf
+10 0 0 10 77 452 Tm
+0.0026 Tc
+0.0256 Tw
+(We have implemented BDNNs for a few cases where)Tj
+T*
+0.0054 Tc
+0.0542 Tw
+(the function is invertible \(for example, our character)Tj
+T*
+0.0096 Tc
+0.0961 Tw
+(recognition patterns\), and where the function is not)Tj
+T*
+0.0235 Tc
+0.235 Tw
+(invertible \(for example, XOR and Student Final)Tj
+T*
+-0.0062 Tc
+0 Tw
+(Marks\).)Tj
+0 -2.6 TD
+0.0031 Tc
+0.0306 Tw
+(In the case of character recognition \(Figure 2\), where)Tj
+0 -1.1 TD
+0.0274 Tc
+0.2737 Tw
+(our training patterns had a one-to-one mapping)Tj
+T*
+-0.0008 Tc
+0 Tw
+(between input and output patterns, we simply used the)Tj
+T*
+-0.0109 Tc
+(patterns unchanged.)Tj
+ET
+1 g
+79 186 206 144 re
+f
+q
+1 i 
+77 186 208 146 re
+W n
+0 G
+0 J 0 j 1 w 10 M []0 d
+79.5 329.5 205 -143 re
+S
+Q
+0.969 g
+108 249 19 18 re
+f
+0 G
+0 J 0 j 0.25 w 10 M []0 d
+1 i 
+108.5 266.5 18 -17 re
+S
+126 249 19 18 re
+f
+126.5 266.5 18 -17 re
+S
+90 215 19 18 re
+f
+90.5 232.5 18 -17 re
+S
+144 198 19 18 re
+f
+144.5 215.5 18 -17 re
+S
+126 198 19 18 re
+f
+126.5 215.5 18 -17 re
+S
+90 198 19 18 re
+f
+90.5 215.5 18 -17 re
+S
+108 198 19 18 re
+f
+108.5 215.5 18 -17 re
+S
+90 232 19 18 re
+f
+90.5 249.5 18 -17 re
+S
+144 249 19 18 re
+f
+144.5 266.5 18 -17 re
+S
+144 300 19 18 re
+f
+144.5 317.5 18 -17 re
+S
+108 300 19 18 re
+f
+108.5 317.5 18 -17 re
+S
+126 300 19 18 re
+f
+126.5 317.5 18 -17 re
+S
+90 300 19 18 re
+f
+90.5 317.5 18 -17 re
+S
+90 249 19 18 re
+f
+90.5 266.5 18 -17 re
+S
+144 266 19 18 re
+f
+144.5 283.5 18 -17 re
+S
+144 283 19 18 re
+f
+144.5 300.5 18 -17 re
+S
+0 g
+172 259 m
+194 265 l
+194 254 l
+172 259 l
+f*
+247 260 m
+224 255 l
+224 266 l
+247 260 l
+f*
+192 262 34 -4 re
+f
+BT
+/TT10 1 Tf
+37.44 0 0 37.44 255 244 Tm
+2 Tr
+0.449 w 
+1 g
+0 Tc
+(2)Tj
+/TT4 1 Tf
+8 0 0 8 79 172 Tm
+0 Tr
+0 g
+0.0061 Tc
+0.0611 Tw
+(Figure 2. A character recognition pattern)Tj
+10 0 0 10 77 150 Tm
+0.0609 Tw
+(For the XOR problem where a zero output is related)Tj
+T*
+0.007 Tc
+0.0697 Tw
+(to four input patterns we used one extra node in the)Tj
+T*
+0.0142 Tc
+0.1419 Tw
+(output in order to make the function invertible, as)Tj
+T*
+0.0029 Tc
+0.0293 Tw
+(shown in Table 1.)Tj
+0 -2.2 TD
+0.0004 Tc
+0.0044 Tw
+(In this way, each output pattern will be related to only)Tj
+0 -1.1 TD
+0.0012 Tc
+0.012 Tw
+(one input pattern, forming a one-to-one mapping.)Tj
+ET
+315 756 1 -28 re
+f
+315 756 41 -1 re
+f
+1 g
+315 727 41 12 re
+f
+0 g
+315 739 1 -12 re
+f
+BT
+10 0 0 10 361 742 Tm
+0 Tc
+0 Tw
+(Inputs)Tj
+ET
+356 756 41 -1 re
+f
+1 g
+356 727 41 12 re
+f
+0 g
+397 756 41 -1 re
+f
+1 g
+397 727 41 12 re
+f
+BT
+10 0 0 10 443 742 Tm
+0 g
+0.0045 Tc
+(Output)Tj
+ET
+438 755 1 -27 re
+f
+438 756 41 -1 re
+f
+1 g
+438 727 41 12 re
+f
+0 g
+438 739 1 -12 re
+f
+BT
+10 0 0 10 484 742 Tm
+-0.0163 Tc
+(Extra)Tj
+ET
+479 755 1 -27 re
+f
+519 756 1 -28 re
+f
+479 756 41 -1 re
+f
+BT
+10 0 0 10 484 733 Tm
+-0.0479 Tc
+(node)Tj
+ET
+479 756 1 -28 re
+f
+519 756 1 -28 re
+f
+BT
+10 0 0 10 320 715 Tm
+0 Tc
+(0)Tj
+ET
+315 728 1 -19 re
+f
+315 728 41 -1 re
+f
+BT
+10 0 0 10 361 715 Tm
+(0)Tj
+ET
+356 727 1 -18 re
+f
+356 728 41 -1 re
+f
+BT
+10 0 0 10 402 715 Tm
+(0)Tj
+ET
+397 727 1 -18 re
+f
+397 728 41 -1 re
+f
+BT
+10 0 0 10 443 715 Tm
+(0)Tj
+ET
+438 727 1 -18 re
+f
+438 728 41 -1 re
+f
+BT
+10 0 0 10 484 715 Tm
+0.025 Tc
+(0.1)Tj
+ET
+479 727 1 -18 re
+f
+519 728 1 -19 re
+f
+479 728 41 -1 re
+f
+BT
+10 0 0 10 320 695 Tm
+0 Tc
+(0)Tj
+ET
+315 709 1 -19 re
+f
+315 709 41 -1 re
+f
+BT
+10 0 0 10 361 695 Tm
+(1)Tj
+ET
+356 708 1 -18 re
+f
+356 709 41 -1 re
+f
+BT
+10 0 0 10 402 695 Tm
+(1)Tj
+ET
+397 708 1 -18 re
+f
+397 709 41 -1 re
+f
+BT
+10 0 0 10 443 695 Tm
+(0)Tj
+ET
+438 708 1 -18 re
+f
+438 709 41 -1 re
+f
+BT
+10 0 0 10 484 695 Tm
+0.025 Tc
+(0.3)Tj
+ET
+479 708 1 -18 re
+f
+519 709 1 -19 re
+f
+479 709 41 -1 re
+f
+BT
+10 0 0 10 320 676 Tm
+0 Tc
+(1)Tj
+ET
+315 690 1 -19 re
+f
+315 690 41 -1 re
+f
+BT
+10 0 0 10 361 676 Tm
+(0)Tj
+ET
+356 689 1 -18 re
+f
+356 690 41 -1 re
+f
+BT
+10 0 0 10 402 676 Tm
+(1)Tj
+ET
+397 689 1 -18 re
+f
+397 690 41 -1 re
+f
+BT
+10 0 0 10 443 676 Tm
+(0)Tj
+ET
+438 689 1 -18 re
+f
+438 690 41 -1 re
+f
+BT
+10 0 0 10 484 676 Tm
+0.025 Tc
+(0.5)Tj
+ET
+479 689 1 -18 re
+f
+519 690 1 -19 re
+f
+479 690 41 -1 re
+f
+BT
+10 0 0 10 320 657 Tm
+0 Tc
+(1)Tj
+ET
+315 671 1 -18 re
+f
+315 671 41 -1 re
+f
+BT
+10 0 0 10 361 657 Tm
+(1)Tj
+ET
+356 670 1 -17 re
+f
+356 671 41 -1 re
+f
+BT
+10 0 0 10 402 657 Tm
+(0)Tj
+ET
+397 670 1 -17 re
+f
+397 671 41 -1 re
+f
+BT
+10 0 0 10 443 657 Tm
+(0)Tj
+ET
+438 670 1 -17 re
+f
+438 671 41 -1 re
+f
+BT
+10 0 0 10 484 657 Tm
+0.025 Tc
+(0.7)Tj
+ET
+479 670 1 -17 re
+f
+519 671 1 -18 re
+f
+479 671 41 -1 re
+f
+BT
+10 0 0 10 320 640 Tm
+0 Tc
+(0)Tj
+ET
+315 653 1 -19 re
+f
+315 653 41 -1 re
+f
+BT
+10 0 0 10 361 640 Tm
+(0)Tj
+ET
+356 652 1 -18 re
+f
+356 653 41 -1 re
+f
+BT
+10 0 0 10 402 640 Tm
+(1)Tj
+ET
+397 652 1 -18 re
+f
+397 653 41 -1 re
+f
+BT
+10 0 0 10 443 640 Tm
+(1)Tj
+ET
+438 652 1 -18 re
+f
+438 653 41 -1 re
+f
+BT
+10 0 0 10 484 640 Tm
+0.025 Tc
+(0.2)Tj
+ET
+479 652 1 -18 re
+f
+519 653 1 -19 re
+f
+479 653 41 -1 re
+f
+BT
+10 0 0 10 320 621 Tm
+0 Tc
+(0)Tj
+ET
+315 634 1 -19 re
+f
+315 634 41 -1 re
+f
+BT
+10 0 0 10 361 621 Tm
+(1)Tj
+ET
+356 633 1 -18 re
+f
+356 634 41 -1 re
+f
+BT
+10 0 0 10 402 621 Tm
+(0)Tj
+ET
+397 633 1 -18 re
+f
+397 634 41 -1 re
+f
+BT
+10 0 0 10 443 621 Tm
+(1)Tj
+ET
+438 633 1 -18 re
+f
+438 634 41 -1 re
+f
+BT
+10 0 0 10 484 621 Tm
+0.025 Tc
+(0.4)Tj
+ET
+479 633 1 -18 re
+f
+519 634 1 -19 re
+f
+479 634 41 -1 re
+f
+BT
+10 0 0 10 320 601 Tm
+0 Tc
+(1)Tj
+ET
+315 615 1 -19 re
+f
+315 615 41 -1 re
+f
+BT
+10 0 0 10 361 601 Tm
+(0)Tj
+ET
+356 614 1 -18 re
+f
+356 615 41 -1 re
+f
+BT
+10 0 0 10 402 601 Tm
+(0)Tj
+ET
+397 614 1 -18 re
+f
+397 615 41 -1 re
+f
+BT
+10 0 0 10 443 601 Tm
+(1)Tj
+ET
+438 614 1 -18 re
+f
+438 615 41 -1 re
+f
+BT
+10 0 0 10 484 601 Tm
+0.025 Tc
+(0.6)Tj
+ET
+479 614 1 -18 re
+f
+519 615 1 -19 re
+f
+479 615 41 -1 re
+f
+BT
+10 0 0 10 320 582 Tm
+0 Tc
+(1)Tj
+ET
+315 596 1 -20 re
+f
+315 596 41 -1 re
+f
+315 577 41 -1 re
+f
+BT
+10 0 0 10 361 582 Tm
+(1)Tj
+ET
+356 595 1 -18 re
+f
+356 596 41 -1 re
+f
+356 577 41 -1 re
+f
+BT
+10 0 0 10 402 582 Tm
+(1)Tj
+ET
+397 595 1 -18 re
+f
+397 596 41 -1 re
+f
+397 577 41 -1 re
+f
+BT
+10 0 0 10 443 582 Tm
+(1)Tj
+ET
+438 595 1 -18 re
+f
+438 596 41 -1 re
+f
+438 577 41 -1 re
+f
+BT
+10 0 0 10 484 582 Tm
+0.025 Tc
+(0.8)Tj
+ET
+479 595 1 -18 re
+f
+519 596 1 -20 re
+f
+479 596 41 -1 re
+f
+479 577 41 -1 re
+f
+q
+309 567 216 189 re
+W n
+BT
+12 0 0 12 311 567 Tm
+0 Tc
+( )Tj
+ET
+Q
+BT
+8 0 0 8 311 766 Tm
+0.0024 Tc
+0.0233 Tw
+(Table 1. XOR problem and using output extra node)Tj
+10 0 0 10 310 558 Tm
+0.0358 Tc
+0.358 Tw
+(This is analogous to the assignment of some)Tj
+T*
+0.0211 Tc
+0.2106 Tw
+(otherwise meaningless mnemonics to a telephone)Tj
+T*
+0.0289 Tc
+0.2888 Tw
+(number to improve our ability to recall it \(the)Tj
+T*
+-0.0068 Tc
+0 Tw
+(psychological term for this approach is called )Tj
+/TT8 1 Tf
+18.1467 0 TD
+-0.0081 Tc
+(narrative)Tj
+-18.1467 -1.1 TD
+-0.0012 Tc
+(stories)Tj
+/TT4 1 Tf
+2.6586 0 TD
+(\). The trained network correctly classified all of)Tj
+-2.6586 -1.1 TD
+0.0021 Tc
+0.0211 Tw
+(the training patterns in the XOR problem.)Tj
+9 0 0 9 318 461 Tm
+0.0027 Tc
+0.027 Tw
+[( Student No.)]TJ
+ET
+311 474 1 -18 re
+f
+311 474 62 -1 re
+f
+BT
+9 0 0 9 380 461 Tm
+0.0212 Tc
+0.2125 Tw
+[( 0275000)]TJ
+ET
+373 473 1 -17 re
+f
+373 474 48 -1 re
+f
+BT
+9 0 0 9 428 461 Tm
+0.0648 Tc
+0 Tw
+(0275105)Tj
+ET
+421 473 1 -17 re
+f
+421 474 48 -1 re
+f
+BT
+9 0 0 9 476 461 Tm
+(0275169)Tj
+ET
+469 473 1 -17 re
+f
+516 474 1 -18 re
+f
+469 474 48 -1 re
+f
+BT
+9 0 0 9 318 443 Tm
+0.0059 Tc
+0.0591 Tw
+(Course No.)Tj
+ET
+311 456 1 -18 re
+f
+311 456 62 -1 re
+f
+1 g
+311 437 62 2 re
+f
+0 g
+311 439 1 -2 re
+f
+BT
+10 0 0 10 380 442 Tm
+0 Tc
+0 Tw
+(3400)Tj
+ET
+373 455 1 -17 re
+f
+373 456 48 -1 re
+f
+BT
+10 0 0 10 428 442 Tm
+(3400)Tj
+ET
+421 455 1 -17 re
+f
+421 456 48 -1 re
+f
+BT
+10 0 0 10 476 442 Tm
+(3972)Tj
+ET
+469 455 1 -17 re
+f
+516 456 1 -18 re
+f
+469 456 48 -1 re
+f
+BT
+9 0 0 9 318 426 Tm
+0.028 Tc
+(Stage)Tj
+ET
+311 438 1 -19 re
+f
+311 438 62 -1 re
+f
+1 g
+311 418 62 3 re
+f
+0 g
+311 421 1 -3 re
+f
+BT
+10 0 0 10 380 425 Tm
+0 Tc
+(1)Tj
+ET
+373 437 1 -18 re
+f
+373 438 48 -1 re
+f
+BT
+10 0 0 10 428 425 Tm
+(2)Tj
+ET
+421 437 1 -18 re
+f
+421 438 48 -1 re
+f
+BT
+10 0 0 10 476 425 Tm
+(1)Tj
+ET
+469 437 1 -18 re
+f
+516 438 1 -19 re
+f
+469 438 48 -1 re
+f
+BT
+9 0 0 9 318 407 Tm
+0.0127 Tc
+0.1266 Tw
+(Enrol. Status)Tj
+ET
+311 419 1 -19 re
+f
+311 419 62 -1 re
+f
+1 g
+311 400 62 2 re
+f
+0 g
+311 402 1 -2 re
+f
+BT
+10 0 0 10 380 406 Tm
+0 Tc
+0 Tw
+(F)Tj
+ET
+373 418 1 -18 re
+f
+373 419 48 -1 re
+f
+BT
+10 0 0 10 428 406 Tm
+(F)Tj
+ET
+421 418 1 -18 re
+f
+421 419 48 -1 re
+f
+BT
+10 0 0 10 476 406 Tm
+0.0882 Tc
+(FS)Tj
+ET
+469 418 1 -18 re
+f
+516 419 1 -19 re
+f
+469 419 48 -1 re
+f
+BT
+9 0 0 9 318 387 Tm
+-0.0027 Tc
+(Tutor Group)Tj
+ET
+311 400 1 -19 re
+f
+311 400 62 -1 re
+f
+1 g
+311 381 62 2 re
+f
+0 g
+311 383 1 -2 re
+f
+BT
+10 0 0 10 380 386 Tm
+-0.0087 Tc
+(T10-yh)Tj
+ET
+373 399 1 -18 re
+f
+373 400 48 -1 re
+f
+BT
+10 0 0 10 428 386 Tm
+-0.0109 Tc
+(T9-ko)Tj
+ET
+421 399 1 -18 re
+f
+421 400 48 -1 re
+f
+BT
+10 0 0 10 476 386 Tm
+(T1-yh)Tj
+ET
+469 399 1 -18 re
+f
+516 400 1 -19 re
+f
+469 400 48 -1 re
+f
+BT
+9 0 0 9 318 368 Tm
+0.0104 Tc
+0.1047 Tw
+(Lab. #2)Tj
+ET
+311 381 1 -19 re
+f
+311 381 62 -1 re
+f
+1 g
+311 362 62 2 re
+f
+0 g
+311 364 1 -2 re
+f
+BT
+10 0 0 10 380 367 Tm
+0.025 Tc
+0 Tw
+(2.5)Tj
+ET
+373 380 1 -18 re
+f
+373 381 48 -1 re
+f
+BT
+10 0 0 10 428 367 Tm
+(2.5)Tj
+ET
+421 380 1 -18 re
+f
+421 381 48 -1 re
+f
+BT
+10 0 0 10 476 367 Tm
+(2.5)Tj
+ET
+469 380 1 -18 re
+f
+516 381 1 -19 re
+f
+469 381 48 -1 re
+f
+BT
+9 0 0 9 318 349 Tm
+0.0078 Tc
+0.0774 Tw
+(Tut. Ass.)Tj
+ET
+311 362 1 -18 re
+f
+311 362 62 -1 re
+f
+1 g
+311 343 62 2 re
+f
+0 g
+311 345 1 -2 re
+f
+BT
+10 0 0 10 380 348 Tm
+0.025 Tc
+0 Tw
+(3.0)Tj
+ET
+373 361 1 -17 re
+f
+373 362 48 -1 re
+f
+BT
+10 0 0 10 428 348 Tm
+(3.5)Tj
+ET
+421 361 1 -17 re
+f
+421 362 48 -1 re
+f
+BT
+10 0 0 10 476 348 Tm
+(3.0)Tj
+ET
+469 361 1 -17 re
+f
+516 362 1 -18 re
+f
+469 362 48 -1 re
+f
+BT
+9 0 0 9 318 332 Tm
+0.0104 Tc
+0.1047 Tw
+(Lab. #4)Tj
+ET
+311 344 1 -19 re
+f
+311 344 62 -1 re
+f
+1 g
+311 324 62 3 re
+f
+0 g
+311 327 1 -3 re
+f
+BT
+10 0 0 10 380 331 Tm
+0.025 Tc
+0 Tw
+(3.0)Tj
+ET
+373 343 1 -18 re
+f
+373 344 48 -1 re
+f
+BT
+10 0 0 10 428 331 Tm
+(2.5)Tj
+ET
+421 343 1 -18 re
+f
+421 344 48 -1 re
+f
+BT
+10 0 0 10 476 331 Tm
+(3.0)Tj
+ET
+469 343 1 -18 re
+f
+516 344 1 -19 re
+f
+469 344 48 -1 re
+f
+BT
+9 0 0 9 318 313 Tm
+0.0108 Tc
+0.1083 Tw
+(Assign H1)Tj
+ET
+311 325 1 -19 re
+f
+311 325 62 -1 re
+f
+1 g
+311 305 62 3 re
+f
+0 g
+311 308 1 -3 re
+f
+BT
+10 0 0 10 380 312 Tm
+0.0167 Tc
+0 Tw
+(18.0)Tj
+ET
+373 324 1 -18 re
+f
+373 325 48 -1 re
+f
+BT
+10 0 0 10 428 312 Tm
+(17.0)Tj
+ET
+421 324 1 -18 re
+f
+421 325 48 -1 re
+f
+BT
+10 0 0 10 476 312 Tm
+(19.5)Tj
+ET
+469 324 1 -18 re
+f
+516 325 1 -19 re
+f
+469 325 48 -1 re
+f
+BT
+9 0 0 9 318 294 Tm
+0.0108 Tc
+0.1083 Tw
+(Assign H2)Tj
+ET
+311 306 1 -19 re
+f
+311 306 62 -1 re
+f
+1 g
+311 287 62 2 re
+f
+0 g
+311 289 1 -2 re
+f
+BT
+10 0 0 10 380 293 Tm
+0.025 Tc
+0 Tw
+(4.5)Tj
+ET
+373 305 1 -18 re
+f
+373 306 48 -1 re
+f
+BT
+10 0 0 10 428 293 Tm
+0.0167 Tc
+(17.5)Tj
+ET
+421 305 1 -18 re
+f
+421 306 48 -1 re
+f
+BT
+10 0 0 10 476 293 Tm
+(19.0)Tj
+ET
+469 305 1 -18 re
+f
+516 306 1 -19 re
+f
+469 306 48 -1 re
+f
+BT
+9 0 0 9 318 274 Tm
+0.0104 Tc
+0.1047 Tw
+(Lab. #7)Tj
+ET
+311 287 1 -19 re
+f
+311 287 62 -1 re
+f
+1 g
+311 268 62 2 re
+f
+0 g
+311 270 1 -2 re
+f
+BT
+10 0 0 10 380 273 Tm
+0.025 Tc
+0 Tw
+(3.0)Tj
+ET
+373 286 1 -18 re
+f
+373 287 48 -1 re
+f
+BT
+10 0 0 10 428 273 Tm
+(3.0)Tj
+ET
+421 286 1 -18 re
+f
+421 287 48 -1 re
+f
+BT
+10 0 0 10 476 273 Tm
+(3.0)Tj
+ET
+469 286 1 -18 re
+f
+516 287 1 -19 re
+f
+469 287 48 -1 re
+f
+BT
+9 0 0 9 318 255 Tm
+0.0176 Tc
+0.1753 Tw
+(Assign. P1)Tj
+ET
+311 268 1 -18 re
+f
+311 268 62 -1 re
+f
+1 g
+311 249 62 2 re
+f
+0 g
+311 251 1 -2 re
+f
+BT
+10 0 0 10 380 254 Tm
+0.0167 Tc
+0 Tw
+(14.0)Tj
+ET
+373 267 1 -17 re
+f
+373 268 48 -1 re
+f
+BT
+10 0 0 10 428 254 Tm
+0.025 Tc
+(5.0)Tj
+ET
+421 267 1 -17 re
+f
+421 268 48 -1 re
+f
+BT
+10 0 0 10 476 254 Tm
+0.0167 Tc
+(16.0)Tj
+ET
+469 267 1 -17 re
+f
+516 268 1 -18 re
+f
+469 268 48 -1 re
+f
+BT
+9 0 0 9 318 238 Tm
+0.0176 Tc
+0.1753 Tw
+(Assign. F1)Tj
+ET
+311 250 1 -19 re
+f
+311 250 62 -1 re
+f
+1 g
+311 230 62 3 re
+f
+0 g
+311 233 1 -3 re
+f
+BT
+10 0 0 10 380 237 Tm
+0.0167 Tc
+0 Tw
+(18.5)Tj
+ET
+373 249 1 -18 re
+f
+373 250 48 -1 re
+f
+BT
+10 0 0 10 428 237 Tm
+(14.5)Tj
+ET
+421 249 1 -18 re
+f
+421 250 48 -1 re
+f
+BT
+10 0 0 10 476 237 Tm
+(14.0)Tj
+ET
+469 249 1 -18 re
+f
+516 250 1 -19 re
+f
+469 250 48 -1 re
+f
+BT
+9 0 0 9 318 219 Tm
+0 Tc
+(Mid-Exam)Tj
+ET
+311 231 1 -19 re
+f
+311 231 62 -1 re
+f
+1 g
+311 211 62 3 re
+f
+0 g
+311 214 1 -3 re
+f
+BT
+10 0 0 10 380 218 Tm
+0.0167 Tc
+(24.0)Tj
+ET
+373 230 1 -18 re
+f
+373 231 48 -1 re
+f
+BT
+10 0 0 10 428 218 Tm
+(10.5)Tj
+ET
+421 230 1 -18 re
+f
+421 231 48 -1 re
+f
+BT
+10 0 0 10 476 218 Tm
+(33.0)Tj
+ET
+469 230 1 -18 re
+f
+516 231 1 -19 re
+f
+469 231 48 -1 re
+f
+BT
+9 0 0 9 318 200 Tm
+0.0131 Tc
+0.1312 Tw
+(Lab. #10)Tj
+ET
+311 212 1 -19 re
+f
+311 212 62 -1 re
+f
+1 g
+311 193 62 2 re
+f
+0 g
+311 195 1 -2 re
+f
+BT
+10 0 0 10 380 199 Tm
+0.025 Tc
+0 Tw
+(2.5)Tj
+ET
+373 211 1 -18 re
+f
+373 212 48 -1 re
+f
+BT
+10 0 0 10 428 199 Tm
+(2.5)Tj
+ET
+421 211 1 -18 re
+f
+421 212 48 -1 re
+f
+BT
+10 0 0 10 476 199 Tm
+(2.5)Tj
+ET
+469 211 1 -18 re
+f
+516 212 1 -19 re
+f
+469 212 48 -1 re
+f
+BT
+9 0 0 9 318 180 Tm
+0.0103 Tc
+0.103 Tw
+(Final Mark)Tj
+ET
+311 193 1 -20 re
+f
+311 193 62 -1 re
+f
+1 g
+311 173 62 2 re
+f
+0 g
+311 175 1 -2 re
+f
+311 174 62 -1 re
+f
+BT
+10 0 0 10 380 179 Tm
+-0.0199 Tc
+0 Tw
+(Credit)Tj
+ET
+373 192 1 -18 re
+f
+373 193 48 -1 re
+f
+373 174 48 -1 re
+f
+BT
+10 0 0 10 428 179 Tm
+0.0075 Tc
+(Pass)Tj
+ET
+421 192 1 -18 re
+f
+421 193 48 -1 re
+f
+421 174 48 -1 re
+f
+BT
+10 0 0 10 476 179 Tm
+0.0112 Tc
+(Dist)Tj
+ET
+469 192 1 -18 re
+f
+516 193 1 -20 re
+f
+469 193 48 -1 re
+f
+469 174 48 -1 re
+f
+q
+309 164 213 310 re
+W n
+BT
+12 0 0 12 311 164 Tm
+0 Tc
+( )Tj
+ET
+Q
+BT
+8 0 0 8 311 484 Tm
+0.0044 Tc
+0.0437 Tw
+(Table 2. Three patterns of student marks.)Tj
+10 0 0 10 310 155 Tm
+0.0088 Tc
+0.0881 Tw
+(For student final mark prediction we did not use an)Tj
+T*
+0.0061 Tc
+0.0614 Tw
+(extra node, but did some statistical manipulations on)Tj
+T*
+0.0093 Tc
+0.0929 Tw
+(the input patterns \(Table 2\) as data preparation. For)Tj
+T*
+0.0361 Tc
+0.361 Tw
+(each class of final marks \(Fail, Pass, Credit,)Tj
+T*
+0.0004 Tc
+0.004 Tw
+(Distinction\) we found the mean of the input values for)Tj
+T*
+0.0011 Tc
+0.0109 Tw
+(each attribute. We also calculated for each of the Pass)Tj
+T*
+0.0016 Tc
+0.0165 Tw
+(and Credit classes six sub-classes and for each of Fail)Tj
+ET
+endstream
+endobj
+15 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT8 7 0 R
+/TT10 16 0 R
+>>
+/ExtGState <<
+/GS1 8 0 R
+>>
+>>
+endobj
+18 0 obj
+<<
+/Length 10774
+>>
+stream
+BT
+/TT4 1 Tf
+10 0 0 10 77 763 Tm
+0 g
+/GS1 gs
+0.0132 Tc
+0.1324 Tw
+(and Distinction three sub-classes, and their related)Tj
+0 -1.1 TD
+0.0037 Tc
+0.0369 Tw
+(input patterns. )Tj
+0 -2.2 TD
+0.0078 Tc
+0.078 Tw
+(Supposing monotonic behaviour of input values, we)Tj
+0 -1.1 TD
+0.0052 Tc
+0.0515 Tw
+(used some simple equations like )Tj
+/TT8 1 Tf
+13.6163 0 TD
+0.0046 Tc
+0.0459 Tw
+(Z = 80%X + 20%Y)Tj
+/TT4 1 Tf
+-13.6163 -1.1 TD
+-0.0017 Tc
+0 Tw
+(to find the related value of inputs for each sub-class. )Tj
+/TT8 1 Tf
+21.0923 0 TD
+0 Tc
+(X)Tj
+/TT4 1 Tf
+-21.0923 -1.1 TD
+0.0051 Tc
+0.0514 Tw
+(is the mean vector or characteristic pattern of a class)Tj
+T*
+0.0154 Tc
+0 Tw
+(and )Tj
+/TT8 1 Tf
+1.9094 0 TD
+0 Tc
+(Y)Tj
+/TT4 1 Tf
+0.627 0 TD
+0.0163 Tc
+0.1631 Tw
+[( is the mean vector of one of its neighbour)]TJ
+-2.5364 -1.1 TD
+0.008 Tc
+0.0802 Tw
+(classes. For example, from the mean vector of class)Tj
+T*
+-0.021 Tc
+0 Tw
+(credit )Tj
+/TT8 1 Tf
+2.5 0 TD
+0.0075 Tc
+(ëCí)Tj
+/TT4 1 Tf
+1.3555 0 TD
+0.0026 Tc
+0.0263 Tw
+(, the following vectors may be calculated as)Tj
+-3.8555 -1.1 TD
+-0.0017 Tc
+0 Tw
+(six new representative patterns. )Tj
+0 -2.2 TD
+-0.0151 Tc
+(These are:)Tj
+/TT8 1 Tf
+7.2 0 TD
+-0.0005 Tc
+(Z1 = 90%C - 10%P)Tj
+0 -1.1 TD
+-0.0012 Tc
+(Z2 = 90%C - 10%D)Tj
+T*
+(Z3 = 80%C - 20%D)Tj
+T*
+-0.0005 Tc
+(Z4 = 80%C - 20%P)Tj
+T*
+(Z5 = 70%C - 30%P)Tj
+-5.5 -1.1 TD
+-0.0012 Tc
+[( )-5251.2(Z6 = 70%C - 30%D)]TJ
+-1.7 -2.2 TD
+0 Tc
+(D)Tj
+/TT4 1 Tf
+0.7585 0 TD
+0.0041 Tc
+0.0408 Tw
+[( and )]TJ
+/TT8 1 Tf
+2.1415 0 TD
+0 Tc
+0 Tw
+(P)Tj
+/TT4 1 Tf
+0.6373 0 TD
+0.0066 Tc
+0.0661 Tw
+[( are the mean vectors for calsses distinction)]TJ
+-3.5373 -1.1 TD
+0.0083 Tc
+0.0831 Tw
+(and pass respectively. This was possible because of)Tj
+T*
+0.0144 Tc
+0.1439 Tw
+(our pre-assumption of the monotonic behaviour of)Tj
+T*
+0.0103 Tc
+0.1031 Tw
+(inputs. We could also use some more sophisticated)Tj
+T*
+-0.0039 Tc
+0 Tw
+(methods like the Z score to identify the expected value)Tj
+T*
+0.01 Tc
+0.0995 Tw
+(of inputs, or sensitivity analysis methods to exploit)Tj
+T*
+0.006 Tc
+0.0597 Tw
+(the behaviour of inputs. We have also found we can)Tj
+T*
+0.0063 Tc
+0.0626 Tw
+(use BDNN to pre-classify the input patterns \(see the)Tj
+T*
+0.0115 Tc
+0.1152 Tw
+(section entitled "Training BDNNs as cluster center)Tj
+T*
+-0.0185 Tc
+0 Tw
+(finders"\).)Tj
+0 -2.2 TD
+0.0065 Tc
+0.0647 Tw
+(Done properly this kind of subclassification of input)Tj
+0 -1.1 TD
+0.0047 Tc
+0.0473 Tw
+(patterns will not cause a malfunction of the network,)Tj
+T*
+0.0002 Tc
+0.0021 Tw
+(and may increase the generalisation and the reliability)Tj
+T*
+-0.005 Tc
+0 Tw
+(of the network leading to faster convergence. )Tj
+0 -2.3 TD
+-0.0029 Tc
+(In training a BDNN for predicting student final marks,)Tj
+0 -1.1 TD
+0.0042 Tc
+0.042 Tw
+(we used the same static momentum and learning rate)Tj
+T*
+0.0073 Tc
+0.0731 Tw
+(in both directions. We intend to investigate whether)Tj
+T*
+0.0108 Tc
+0.1084 Tw
+(the use of dynamic coefficients will result in faster)Tj
+T*
+0.0047 Tc
+0.0473 Tw
+(convergence of the network. It is probable that using)Tj
+T*
+0.0193 Tc
+0.1925 Tw
+(different biases could improve learning time, but)Tj
+T*
+0.0226 Tc
+0.2262 Tw
+(would be at the cost of partially decoupling the)Tj
+T*
+0.026 Tc
+0.2598 Tw
+(forward and reverse directions. We have yet to)Tj
+T*
+-0.0031 Tc
+0 Tw
+(investigate whether this partial decoupling reduces the)Tj
+T*
+-0.0009 Tc
+(overall usefulness of our BDNNs. )Tj
+0 -2.2 TD
+0.0007 Tc
+0.0067 Tw
+(For the first 50 epochs, the BDNN is trained normally)Tj
+0 -1.1 TD
+-0.0052 Tc
+0 Tw
+(in the forward direction. Then, the direction of training)Tj
+T*
+0.0058 Tc
+0.0581 Tw
+(of the network is reversed. A direction of training is)Tj
+T*
+0.0084 Tc
+0.084 Tw
+(maintained until the overall normalised error is less)Tj
+T*
+0.0027 Tc
+0.0267 Tw
+(than the error of the previous direction of training, or)Tj
+T*
+0.0016 Tc
+0.0163 Tw
+(some maximum number of epochs have been spent in)Tj
+T*
+-0.0019 Tc
+0 Tw
+(the current direction, or the overall error in the current)Tj
+T*
+0.0184 Tc
+0.1843 Tw
+(direction is less than the error tolerance we have)Tj
+T*
+-0.0101 Tc
+0 Tw
+(predefined for this direction. This sequence of reversals)Tj
+T*
+0.0142 Tc
+0.142 Tw
+(of direction of training continues until the error is)Tj
+T*
+-0.0055 Tc
+0 Tw
+(below the error tolerance set for either direction.)Tj
+0 -2.2 TD
+-0.0038 Tc
+(The trained BDNN correctly classified 74% of student)Tj
+0 -1.1 TD
+0.0121 Tc
+0.1206 Tw
+(mark training patterns. A number of improvements)Tj
+T*
+0.0034 Tc
+0.0335 Tw
+(are possible, such as removing the outliers, softening)Tj
+T*
+0.0127 Tc
+0.1268 Tw
+(the sharp edges between the subclasses, and doing)Tj
+T*
+0.0007 Tc
+0.0066 Tw
+(some preparation techniques on the training data such)Tj
+23.3 68.3 TD
+0.0038 Tc
+0.0376 Tw
+(as using binary inputs instead of continuous numbers)Tj
+0 -1.1 TD
+0.0054 Tc
+0.0542 Tw
+(to code fields like session number, or by substitution)Tj
+T*
+0.0013 Tc
+0.0128 Tw
+(of missing values with the most expected values.)Tj
+0 -2.2 TD
+0.0224 Tc
+0.2238 Tw
+(Finally the assumption of monotonic increase of)Tj
+0 -1.1 TD
+0.0093 Tc
+0.0927 Tw
+(values of some fields does not hold. Thus, the 74%)Tj
+T*
+-0.0087 Tc
+0 Tw
+(performance is quite good.)Tj
+0 -2.2 TD
+0.0238 Tc
+0.2379 Tw
+(Note that we have used the current encoding to)Tj
+0 -1.1 TD
+0.0044 Tc
+0.0439 Tw
+(maintain comparability with previous work using the)Tj
+T*
+0.0028 Tc
+0.0281 Tw
+(same data set [4,15]. A future phase of this work will)Tj
+T*
+0.0078 Tc
+0.0776 Tw
+(be to compare the extraction of rules from a BDNN)Tj
+T*
+0.0099 Tc
+0.099 Tw
+(with our previous rule extraction using this data set)Tj
+T*
+0.0057 Tc
+0 Tw
+([5,17].)Tj
+/TT2 1 Tf
+12 0 0 12 310 597 Tm
+0.0212 Tc
+0.2118 Tw
+[(5)-228.8(.)-312.1(Training BDNNs as Cluster Center)]TJ
+1.3333 -1 TD
+0.051 Tc
+0 Tw
+(Finders)Tj
+/TT4 1 Tf
+10 0 0 10 310 561 Tm
+0.0044 Tc
+0.0442 Tw
+(If we train BDNNs with no limitation on the relation)Tj
+0 -1.1 TD
+0.0221 Tc
+0.2213 Tw
+(between input and output patterns, it will find a)Tj
+T*
+0.0121 Tc
+0.1206 Tw
+(representative input vector for each class of output)Tj
+T*
+0.0204 Tc
+0.2037 Tw
+(patterns. The vector components will contain the)Tj
+T*
+-0.0009 Tc
+0 Tw
+(most expected values for that field in the class.)Tj
+0 -2.2 TD
+-0.0034 Tc
+(To explore the properties of these vectors, we trained a)Tj
+0 -1.1 TD
+0.0005 Tc
+0.005 Tw
+(BDNN to find the representative vector of the class of)Tj
+T*
+0.025 Tc
+0.2504 Tw
+(points in a circle. If these points have an even)Tj
+T*
+0.011 Tc
+0.1099 Tw
+(distribution, BDNN will represent the center of the)Tj
+T*
+-0.003 Tc
+0 Tw
+(circle as the cluster center \(Figures 3 and 4\).)Tj
+ET
+1 1 1 rg
+0 0 0 RG
+0 J 0 j 1 w 10 M []0 d
+/GS2 gs
+1 i 
+310 437 176 -150 re
+B*
+q
+381 347 m
+381 358.598 390.402 368 402 368 c
+413.598 368 423 358.598 423 347 c
+423 335.402 413.598 326 402 326 c
+390.402 326 381 335.402 381 347 c
+W* n
+BT
+/T2 1 Tf
+7.98 0 0 7.98 367.08 383.04 Tm
+0 0 0 rg
+/GS3 gs
+0 Tc
+(1111)Tj
+0 -2 TD
+(1111)Tj
+T*
+(1111)Tj
+T*
+(1111)Tj
+ET
+Q
+q
+381 347 m
+381 358.598 390.402 368 402 368 c
+413.598 368 423 358.598 423 347 c
+423 335.402 413.598 326 402 326 c
+390.402 326 381 335.402 381 347 c
+h
+367.08 319.2 m
+W* n
+381 347 m
+381 358.598 390.402 368 402 368 c
+413.598 368 423 358.598 423 347 c
+423 335.402 413.598 326 402 326 c
+390.402 326 381 335.402 381 347 c
+W* n
+BT
+/T2 1 Tf
+7.98 0 0 7.98 367.08 383.04 Tm
+/GS3 gs
+0 Tc
+(0000)Tj
+0 -2 TD
+(0000)Tj
+T*
+(0000)Tj
+T*
+(0000)Tj
+ET
+Q
+381 347 m
+381 358.598 390.402 368 402 368 c
+413.598 368 423 358.598 423 347 c
+423 335.402 413.598 326 402 326 c
+390.402 326 381 335.402 381 347 c
+s
+356 402.5 m
+356 408.851 379.729 414 409 414 c
+438.271 414 462 408.851 462 402.5 c
+462 396.149 438.271 391 409 391 c
+379.729 391 356 396.149 356 402.5 c
+b*
+BT
+1 0 0 1 376 406 Tm
+0 g
+/GS1 gs
+0 Tc
+()Tj
+8 0 0 8 376 400 Tm
+0.0075 Tc
+0.0746 Tw
+(The center of cluster.)Tj
+ET
+0 0 0 rg
+/GS2 gs
+473 312 m
+458 309 l
+458 316 l
+473 312 l
+f*
+337 312 m
+459 312 l
+S
+337 424 m
+340 410 l
+333 410 l
+337 424 l
+f*
+337 313 m
+337 409 l
+S
+BT
+1 0 0 1 465 306 Tm
+0 g
+/GS1 gs
+0 Tc
+0 Tw
+()Tj
+12 0 0 12 465 297 Tm
+(X)Tj
+1 0 0 1 320 425 Tm
+()Tj
+12 0 0 12 320 416 Tm
+(Y)Tj
+1 0 0 1 325 311 Tm
+()Tj
+12 0 0 12 325 302 Tm
+(0)Tj
+ET
+0 0 0 rg
+/GS2 gs
+400 347.5 m
+400 348.328 400.672 349 401.5 349 c
+402.328 349 403 348.328 403 347.5 c
+403 346.672 402.328 346 401.5 346 c
+400.672 346 400 346.672 400 347.5 c
+b*
+1 1 1 rg
+397 391 m
+402 351 l
+420 391 l
+B*
+1 1 1 RG
+398.91 386 m
+397.954 394 l
+419.942 394 l
+417.074 387 l
+B*
+BT
+8 0 0 8 311 272 Tm
+0 g
+/GS1 gs
+0.0028 Tc
+0.0452 Tw
+[(Figure )42.5(3. )-81.7(BDNN finds the )]TJ
+11.0017 0 TD
+0.0044 Tc
+0.0436 Tw
+(center of the cluster. The)Tj
+-7.0017 -1 TD
+0.0041 Tc
+0.041 Tw
+(center belongs to the cluster.)Tj
+ET
+1 1 1 rg
+0 0 0 RG
+/GS2 gs
+310 249 176 -150 re
+B*
+q
+381 159 m
+381 170.598 390.402 180 402 180 c
+413.598 180 423 170.598 423 159 c
+423 147.402 413.598 138 402 138 c
+390.402 138 381 147.402 381 159 c
+W* n
+BT
+/T3 1 Tf
+7.98 0 0 7.98 367.08 191.52 Tm
+0 0 0 rg
+/GS3 gs
+0 Tc
+0 Tw
+(1111)Tj
+0 -2 TD
+(1111)Tj
+T*
+(1111)Tj
+T*
+(1111)Tj
+ET
+Q
+q
+381 159 m
+381 170.598 390.402 180 402 180 c
+413.598 180 423 170.598 423 159 c
+423 147.402 413.598 138 402 138 c
+390.402 138 381 147.402 381 159 c
+h
+367.08 127.68 m
+W* n
+381 159 m
+381 170.598 390.402 180 402 180 c
+413.598 180 423 170.598 423 159 c
+423 147.402 413.598 138 402 138 c
+390.402 138 381 147.402 381 159 c
+W* n
+BT
+/T3 1 Tf
+7.98 0 0 7.98 367.08 191.52 Tm
+/GS3 gs
+0 Tc
+0 Tw
+(0000)Tj
+0 -2 TD
+(0000)Tj
+T*
+(0000)Tj
+T*
+(0000)Tj
+ET
+Q
+381 159 m
+381 170.598 390.402 180 402 180 c
+413.598 180 423 170.598 423 159 c
+423 147.402 413.598 138 402 138 c
+390.402 138 381 147.402 381 159 c
+s
+395 159 m
+395 162.866 398.134 166 402 166 c
+405.866 166 409 162.866 409 159 c
+409 155.134 405.866 152 402 152 c
+398.134 152 395 155.134 395 159 c
+b*
+356 214.5 m
+356 220.851 379.729 226 409 226 c
+438.271 226 462 220.851 462 214.5 c
+462 208.149 438.271 203 409 203 c
+379.729 203 356 208.149 356 214.5 c
+b*
+BT
+1 0 0 1 376 218 Tm
+0 g
+/GS1 gs
+0 Tc
+0 Tw
+()Tj
+8 0 0 8 376 212 Tm
+0.0075 Tc
+0.0746 Tw
+(The center of cluster.)Tj
+ET
+0 0 0 rg
+/GS2 gs
+473 124 m
+458 121 l
+458 128 l
+473 124 l
+f*
+337 124 m
+459 124 l
+S
+337 236 m
+340 222 l
+333 222 l
+337 236 l
+f*
+337 125 m
+337 221 l
+S
+BT
+1 0 0 1 465 118 Tm
+0 g
+/GS1 gs
+0 Tc
+0 Tw
+()Tj
+12 0 0 12 465 109 Tm
+(X)Tj
+1 0 0 1 320 237 Tm
+()Tj
+12 0 0 12 320 228 Tm
+(Y)Tj
+1 0 0 1 325 123 Tm
+()Tj
+12 0 0 12 325 114 Tm
+(0)Tj
+ET
+0 0 0 rg
+/GS2 gs
+400 159.5 m
+400 160.328 400.672 161 401.5 161 c
+402.328 161 403 160.328 403 159.5 c
+403 158.672 402.328 158 401.5 158 c
+400.672 158 400 158.672 400 159.5 c
+b*
+1 1 1 rg
+397 203 m
+402 163 l
+420 203 l
+B*
+1 1 1 RG
+398.909 197.526 m
+397.953 206.022 l
+419.941 206.022 l
+417.073 198.588 l
+B*
+BT
+8 0 0 8 311 84 Tm
+0 g
+/GS1 gs
+0.0028 Tc
+0.0452 Tw
+[(Figure )42.5(4. )-81.7(BDNN finds the )]TJ
+11.0017 0 TD
+0.0044 Tc
+0.0436 Tw
+(center of the cluster. The)Tj
+-7.0017 -1 TD
+0.0033 Tc
+0.0319 Tw
+(center does not belong to the cluster.)Tj
+ET
+endstream
+endobj
+19 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT8 7 0 R
+/T2 20 0 R
+/T3 21 0 R
+>>
+/ExtGState <<
+/GS1 8 0 R
+/GS2 22 0 R
+/GS3 23 0 R
+>>
+>>
+endobj
+24 0 obj
+<<
+/ProcSet [/PDF /ImageB ]
+>>
+endobj
+20 0 obj
+<<
+/Name /T2
+/Type /Font
+/Subtype /Type3
+/Resources 24 0 R
+/FontBBox [0 0 16 16]
+/FontMatrix [0.125 0 0 -0.125 0 0]
+/FirstChar 48
+/LastChar 49
+/Encoding 25 0 R
+/CharProcs 26 0 R
+/Widths [16 16 ]
+/ToUnicode 27 0 R
+>>
+endobj
+25 0 obj
+<<
+/Type /Encoding
+/Differences [48/zero /one ]
+>>
+endobj
+26 0 obj
+<<
+/zero 28 0 R
+/one 29 0 R
+>>
+endobj
+28 0 obj
+<<
+/Length 111
+>>
+stream
+16 0 0 0 16 16 d1
+q
+16 0 0 -16 0 16 cm
+BI
+/W 16
+/H 16
+/BPC 1
+/IM true
+ID ±±00ÿÿ¿¿çç±±00ÿÿ¿¿çç
+EI
+Q
+endstream
+endobj
+29 0 obj
+<<
+/Length 111
+>>
+stream
+16 0 0 0 16 16 d1
+q
+16 0 0 -16 0 16 cm
+BI
+/W 16
+/H 16
+/BPC 1
+/IM true
+ID NNœœ¸¸‰‰''??ÛÛrrNNœœ¸¸‰‰''??ÛÛrr
+EI
+Q
+endstream
+endobj
+30 0 obj
+<<
+/ProcSet [/PDF /ImageB ]
+>>
+endobj
+21 0 obj
+<<
+/Name /T3
+/Type /Font
+/Subtype /Type3
+/Resources 30 0 R
+/FontBBox [0 0 16 16]
+/FontMatrix [0.125 0 0 -0.125 0 0]
+/FirstChar 48
+/LastChar 49
+/Encoding 31 0 R
+/CharProcs 32 0 R
+/Widths [16 16 ]
+/ToUnicode 33 0 R
+>>
+endobj
+31 0 obj
+<<
+/Type /Encoding
+/Differences [48/zero /one ]
+>>
+endobj
+32 0 obj
+<<
+/zero 34 0 R
+/one 35 0 R
+>>
+endobj
+34 0 obj
+<<
+/Length 111
+>>
+stream
+16 0 0 0 16 16 d1
+q
+16 0 0 -16 0 16 cm
+BI
+/W 16
+/H 16
+/BPC 1
+/IM true
+ID ±±00ÿÿ¿¿çç±±00ÿÿ¿¿çç
+EI
+Q
+endstream
+endobj
+35 0 obj
+<<
+/Length 111
+>>
+stream
+16 0 0 0 16 16 d1
+q
+16 0 0 -16 0 16 cm
+BI
+/W 16
+/H 16
+/BPC 1
+/IM true
+ID NNœœ¸¸‰‰''??ÛÛrrNNœœ¸¸‰‰''??ÛÛrr
+EI
+Q
+endstream
+endobj
+37 0 obj
+<<
+/Length 20073
+>>
+stream
+BT
+/TT4 1 Tf
+10 0 0 10 77 763 Tm
+0 g
+/GS1 gs
+0.0073 Tc
+0.0733 Tw
+(Training a BDNN to find the cluster centers of four)Tj
+0 -1.1 TD
+0.0224 Tc
+0.2241 Tw
+(classes of SFM produced the four representative)Tj
+T*
+0.0013 Tc
+0.0132 Tw
+(vectors or class prototypes shown in Table 3.)Tj
+/TT2 1 Tf
+9 0 0 9 86 691 Tm
+0.0584 Tc
+0.5848 Tw
+(Stu. Class)Tj
+ET
+1 i 
+79 704 1 -18 re
+f
+79 704 63 -1 re
+f
+BT
+9 0 0 9 149 691 Tm
+0.1669 Tc
+0 Tw
+(Dist)Tj
+ET
+142 703 1 -17 re
+f
+142 704 36 -1 re
+f
+BT
+9 0 0 9 185 691 Tm
+0.0559 Tc
+(Cred)Tj
+ET
+178 703 1 -17 re
+f
+178 704 36 -1 re
+f
+BT
+9 0 0 9 221 691 Tm
+0.1482 Tc
+(Pass)Tj
+ET
+214 703 1 -17 re
+f
+214 704 36 -1 re
+f
+BT
+9 0 0 9 257 691 Tm
+(Fail)Tj
+ET
+250 703 1 -17 re
+f
+285 704 1 -18 re
+f
+250 704 36 -1 re
+f
+BT
+/TT4 1 Tf
+9 0 0 9 86 673 Tm
+0.0059 Tc
+0.0591 Tw
+(Course No.)Tj
+ET
+79 686 1 -18 re
+f
+79 686 63 -1 re
+f
+1 g
+79 667 63 2 re
+f
+0 g
+79 669 1 -2 re
+f
+BT
+10 0 0 10 149 672 Tm
+0.0167 Tc
+0 Tw
+(0.37)Tj
+ET
+142 685 1 -17 re
+f
+142 686 36 -1 re
+f
+BT
+10 0 0 10 185 672 Tm
+(0.13)Tj
+ET
+178 685 1 -17 re
+f
+178 686 36 -1 re
+f
+BT
+10 0 0 10 221 672 Tm
+(0.76)Tj
+ET
+214 685 1 -17 re
+f
+214 686 36 -1 re
+f
+BT
+10 0 0 10 257 672 Tm
+(0.56)Tj
+ET
+250 685 1 -17 re
+f
+285 686 1 -18 re
+f
+250 686 36 -1 re
+f
+BT
+9 0 0 9 86 656 Tm
+0.028 Tc
+(Stage)Tj
+ET
+79 668 1 -19 re
+f
+79 668 63 -1 re
+f
+1 g
+79 648 63 3 re
+f
+0 g
+79 651 1 -3 re
+f
+BT
+10 0 0 10 149 655 Tm
+0.0167 Tc
+(0.56)Tj
+ET
+142 667 1 -18 re
+f
+142 668 36 -1 re
+f
+BT
+10 0 0 10 185 655 Tm
+(0.51)Tj
+ET
+178 667 1 -18 re
+f
+178 668 36 -1 re
+f
+BT
+10 0 0 10 221 655 Tm
+(0.64)Tj
+ET
+214 667 1 -18 re
+f
+214 668 36 -1 re
+f
+BT
+10 0 0 10 257 655 Tm
+(0.74)Tj
+ET
+250 667 1 -18 re
+f
+285 668 1 -19 re
+f
+250 668 36 -1 re
+f
+BT
+9 0 0 9 86 637 Tm
+0.0127 Tc
+0.1266 Tw
+(Enrol. Status)Tj
+ET
+79 649 1 -19 re
+f
+79 649 63 -1 re
+f
+1 g
+79 630 63 2 re
+f
+0 g
+79 632 1 -2 re
+f
+BT
+10 0 0 10 149 636 Tm
+0.0167 Tc
+0 Tw
+(0.52)Tj
+ET
+142 648 1 -18 re
+f
+142 649 36 -1 re
+f
+BT
+10 0 0 10 185 636 Tm
+(0.65)Tj
+ET
+178 648 1 -18 re
+f
+178 649 36 -1 re
+f
+BT
+10 0 0 10 221 636 Tm
+(0.99)Tj
+ET
+214 648 1 -18 re
+f
+214 649 36 -1 re
+f
+BT
+10 0 0 10 257 636 Tm
+(1.00)Tj
+ET
+250 648 1 -18 re
+f
+285 649 1 -19 re
+f
+250 649 36 -1 re
+f
+BT
+9 0 0 9 86 617 Tm
+-0.0027 Tc
+(Tutor Group)Tj
+ET
+79 630 1 -19 re
+f
+79 630 63 -1 re
+f
+1 g
+79 611 63 2 re
+f
+0 g
+79 613 1 -2 re
+f
+BT
+10 0 0 10 149 616 Tm
+0.0167 Tc
+(0.64)Tj
+ET
+142 629 1 -18 re
+f
+142 630 36 -1 re
+f
+BT
+10 0 0 10 185 616 Tm
+(0.63)Tj
+ET
+178 629 1 -18 re
+f
+178 630 36 -1 re
+f
+BT
+10 0 0 10 221 616 Tm
+(0.72)Tj
+ET
+214 629 1 -18 re
+f
+214 630 36 -1 re
+f
+BT
+10 0 0 10 257 616 Tm
+(0.70)Tj
+ET
+250 629 1 -18 re
+f
+285 630 1 -19 re
+f
+250 630 36 -1 re
+f
+BT
+9 0 0 9 86 598 Tm
+0.0104 Tc
+0.1047 Tw
+(Lab. #2)Tj
+ET
+79 611 1 -19 re
+f
+79 611 63 -1 re
+f
+1 g
+79 592 63 2 re
+f
+0 g
+79 594 1 -2 re
+f
+BT
+10 0 0 10 149 597 Tm
+0.0167 Tc
+0 Tw
+(0.82)Tj
+ET
+142 610 1 -18 re
+f
+142 611 36 -1 re
+f
+BT
+10 0 0 10 185 597 Tm
+(0.82)Tj
+ET
+178 610 1 -18 re
+f
+178 611 36 -1 re
+f
+BT
+10 0 0 10 221 597 Tm
+(0.51)Tj
+ET
+214 610 1 -18 re
+f
+214 611 36 -1 re
+f
+BT
+10 0 0 10 257 597 Tm
+(0.36)Tj
+ET
+250 610 1 -18 re
+f
+285 611 1 -19 re
+f
+250 611 36 -1 re
+f
+BT
+9 0 0 9 86 579 Tm
+0.0039 Tc
+0.0384 Tw
+(Tut. Ass. )Tj
+ET
+79 592 1 -18 re
+f
+79 592 63 -1 re
+f
+1 g
+79 573 63 2 re
+f
+0 g
+79 575 1 -2 re
+f
+BT
+10 0 0 10 149 578 Tm
+0.0167 Tc
+0 Tw
+(0.71)Tj
+ET
+142 591 1 -17 re
+f
+142 592 36 -1 re
+f
+BT
+10 0 0 10 185 578 Tm
+(0.66)Tj
+ET
+178 591 1 -17 re
+f
+178 592 36 -1 re
+f
+BT
+10 0 0 10 221 578 Tm
+(0.52)Tj
+ET
+214 591 1 -17 re
+f
+214 592 36 -1 re
+f
+BT
+10 0 0 10 257 578 Tm
+(0.39)Tj
+ET
+250 591 1 -17 re
+f
+285 592 1 -18 re
+f
+250 592 36 -1 re
+f
+BT
+9 0 0 9 86 562 Tm
+0.0104 Tc
+0.1047 Tw
+(Lab. #4)Tj
+ET
+79 574 1 -19 re
+f
+79 574 63 -1 re
+f
+1 g
+79 554 63 3 re
+f
+0 g
+79 557 1 -3 re
+f
+BT
+10 0 0 10 149 561 Tm
+0.0167 Tc
+0 Tw
+(0.91)Tj
+ET
+142 573 1 -18 re
+f
+142 574 36 -1 re
+f
+BT
+10 0 0 10 185 561 Tm
+(0.70)Tj
+ET
+178 573 1 -18 re
+f
+178 574 36 -1 re
+f
+BT
+10 0 0 10 221 561 Tm
+(0.46)Tj
+ET
+214 573 1 -18 re
+f
+214 574 36 -1 re
+f
+BT
+10 0 0 10 257 561 Tm
+(0.25)Tj
+ET
+250 573 1 -18 re
+f
+285 574 1 -19 re
+f
+250 574 36 -1 re
+f
+BT
+9 0 0 9 86 543 Tm
+0.0108 Tc
+0.1083 Tw
+(Assign H1)Tj
+ET
+79 555 1 -19 re
+f
+79 555 63 -1 re
+f
+1 g
+79 535 63 3 re
+f
+0 g
+79 538 1 -3 re
+f
+BT
+10 0 0 10 149 542 Tm
+0.0167 Tc
+0 Tw
+(0.78)Tj
+ET
+142 554 1 -18 re
+f
+142 555 36 -1 re
+f
+BT
+10 0 0 10 185 542 Tm
+(0.81)Tj
+ET
+178 554 1 -18 re
+f
+178 555 36 -1 re
+f
+BT
+10 0 0 10 221 542 Tm
+(0.73)Tj
+ET
+214 554 1 -18 re
+f
+214 555 36 -1 re
+f
+BT
+10 0 0 10 257 542 Tm
+(0.35)Tj
+ET
+250 554 1 -18 re
+f
+285 555 1 -19 re
+f
+250 555 36 -1 re
+f
+BT
+9 0 0 9 86 524 Tm
+0.0108 Tc
+0.1083 Tw
+(Assign H2)Tj
+ET
+79 536 1 -19 re
+f
+79 536 63 -1 re
+f
+1 g
+79 517 63 2 re
+f
+0 g
+79 519 1 -2 re
+f
+BT
+10 0 0 10 149 523 Tm
+0.0167 Tc
+0 Tw
+(0.89)Tj
+ET
+142 535 1 -18 re
+f
+142 536 36 -1 re
+f
+BT
+10 0 0 10 185 523 Tm
+(0.75)Tj
+ET
+178 535 1 -18 re
+f
+178 536 36 -1 re
+f
+BT
+10 0 0 10 221 523 Tm
+(0.71)Tj
+ET
+214 535 1 -18 re
+f
+214 536 36 -1 re
+f
+BT
+10 0 0 10 257 523 Tm
+(0.18)Tj
+ET
+250 535 1 -18 re
+f
+285 536 1 -19 re
+f
+250 536 36 -1 re
+f
+BT
+9 0 0 9 86 504 Tm
+0.0104 Tc
+0.1047 Tw
+(Lab. #7)Tj
+ET
+79 517 1 -19 re
+f
+79 517 63 -1 re
+f
+1 g
+79 498 63 2 re
+f
+0 g
+79 500 1 -2 re
+f
+BT
+10 0 0 10 149 503 Tm
+0.0167 Tc
+0 Tw
+(0.66)Tj
+ET
+142 516 1 -18 re
+f
+142 517 36 -1 re
+f
+BT
+10 0 0 10 185 503 Tm
+(0.66)Tj
+ET
+178 516 1 -18 re
+f
+178 517 36 -1 re
+f
+BT
+10 0 0 10 221 503 Tm
+(0.39)Tj
+ET
+214 516 1 -18 re
+f
+214 517 36 -1 re
+f
+BT
+10 0 0 10 257 503 Tm
+(0.06)Tj
+ET
+250 516 1 -18 re
+f
+285 517 1 -19 re
+f
+250 517 36 -1 re
+f
+BT
+9 0 0 9 86 485 Tm
+0.0176 Tc
+0.1753 Tw
+(Assign. P1)Tj
+ET
+79 498 1 -18 re
+f
+79 498 63 -1 re
+f
+1 g
+79 479 63 2 re
+f
+0 g
+79 481 1 -2 re
+f
+BT
+10 0 0 10 149 484 Tm
+0.0167 Tc
+0 Tw
+(0.98)Tj
+ET
+142 497 1 -17 re
+f
+142 498 36 -1 re
+f
+BT
+10 0 0 10 185 484 Tm
+(0.70)Tj
+ET
+178 497 1 -17 re
+f
+178 498 36 -1 re
+f
+BT
+10 0 0 10 221 484 Tm
+(0.61)Tj
+ET
+214 497 1 -17 re
+f
+214 498 36 -1 re
+f
+BT
+10 0 0 10 257 484 Tm
+(0.22)Tj
+ET
+250 497 1 -17 re
+f
+285 498 1 -18 re
+f
+250 498 36 -1 re
+f
+BT
+9 0 0 9 86 468 Tm
+0.0176 Tc
+0.1753 Tw
+(Assign. F1)Tj
+ET
+79 480 1 -19 re
+f
+79 480 63 -1 re
+f
+1 g
+79 460 63 3 re
+f
+0 g
+79 463 1 -3 re
+f
+BT
+10 0 0 10 149 467 Tm
+0.0167 Tc
+0 Tw
+(0.84)Tj
+ET
+142 479 1 -18 re
+f
+142 480 36 -1 re
+f
+BT
+10 0 0 10 185 467 Tm
+(0.36)Tj
+ET
+178 479 1 -18 re
+f
+178 480 36 -1 re
+f
+BT
+10 0 0 10 221 467 Tm
+(0.24)Tj
+ET
+214 479 1 -18 re
+f
+214 480 36 -1 re
+f
+BT
+10 0 0 10 257 467 Tm
+(0.11)Tj
+ET
+250 479 1 -18 re
+f
+285 480 1 -19 re
+f
+250 480 36 -1 re
+f
+BT
+9 0 0 9 86 449 Tm
+0 Tc
+(Mid-Exam)Tj
+ET
+79 461 1 -19 re
+f
+79 461 63 -1 re
+f
+1 g
+79 441 63 3 re
+f
+0 g
+79 444 1 -3 re
+f
+BT
+10 0 0 10 149 448 Tm
+0.0167 Tc
+(0.76)Tj
+ET
+142 460 1 -18 re
+f
+142 461 36 -1 re
+f
+BT
+10 0 0 10 185 448 Tm
+(0.58)Tj
+ET
+178 460 1 -18 re
+f
+178 461 36 -1 re
+f
+BT
+10 0 0 10 221 448 Tm
+0.025 Tc
+(0.4)Tj
+ET
+214 460 1 -18 re
+f
+214 461 36 -1 re
+f
+BT
+10 0 0 10 257 448 Tm
+0.0167 Tc
+(0.22)Tj
+ET
+250 460 1 -18 re
+f
+285 461 1 -19 re
+f
+250 461 36 -1 re
+f
+BT
+9 0 0 9 86 430 Tm
+0.0131 Tc
+0.1312 Tw
+(Lab. #10)Tj
+ET
+79 442 1 -20 re
+f
+79 442 63 -1 re
+f
+1 g
+79 422 63 2 re
+f
+0 g
+79 424 1 -2 re
+f
+79 423 63 -1 re
+f
+BT
+10 0 0 10 149 429 Tm
+0.0167 Tc
+0 Tw
+(0.51)Tj
+ET
+142 441 1 -18 re
+f
+142 442 36 -1 re
+f
+142 423 36 -1 re
+f
+BT
+10 0 0 10 185 429 Tm
+(0.69)Tj
+ET
+178 441 1 -18 re
+f
+178 442 36 -1 re
+f
+178 423 36 -1 re
+f
+BT
+10 0 0 10 221 429 Tm
+(0.47)Tj
+ET
+214 441 1 -18 re
+f
+214 442 36 -1 re
+f
+214 423 36 -1 re
+f
+BT
+10 0 0 10 257 429 Tm
+(0.16)Tj
+ET
+250 441 1 -18 re
+f
+285 442 1 -20 re
+f
+250 442 36 -1 re
+f
+250 423 36 -1 re
+f
+q
+77 413 210 291 re
+W n
+BT
+12 0 0 12 79 413 Tm
+0 Tc
+( )Tj
+ET
+Q
+BT
+8 0 0 8 79 722 Tm
+0.0036 Tc
+0.0366 Tw
+[(Table 3. )-370.2(Center of clusters for SFM prediction extracted by)]TJ
+4 -1 TD
+0.0141 Tc
+0 Tw
+(BDNN)Tj
+10 0 0 10 77 404 Tm
+0.0006 Tc
+0.0056 Tw
+(A BDNN was also trained to find the class prototypes)Tj
+0 -1.1 TD
+0.0055 Tc
+0.0546 Tw
+(for the GDP of four classes of countries. Results are)Tj
+T*
+0.0191 Tc
+0.1905 Tw
+(shown in Table 4. These tables explore the most)Tj
+T*
+0.0006 Tc
+0.0058 Tw
+(expected partial grades of a student for each class and)Tj
+T*
+-0.0027 Tc
+0 Tw
+(the most expected partial information about each class)Tj
+T*
+0.0027 Tc
+0.0271 Tw
+(of GNP. The BDNNs could correctly classify 72% of)Tj
+T*
+0.0003 Tc
+0.0027 Tw
+(SFM test data and 62% of GNP test data.)Tj
+0 -2.2 TD
+0.0024 Tc
+0.024 Tw
+(In Table 3, we can find that midterm exam marks are)Tj
+0 -1.1 TD
+0.0126 Tc
+0.126 Tw
+(less than the normal standard indicating that it has)Tj
+T*
+0.0062 Tc
+0.0616 Tw
+(been rather difficult for all students. Lab. #10 marks)Tj
+T*
+0.0068 Tc
+0.0683 Tw
+(for the Distinction class are roughly the same as for)Tj
+T*
+0.0067 Tc
+0.0673 Tw
+(the Pass class indicating that time management may)Tj
+T*
+0.0126 Tc
+0.1262 Tw
+(have a very important effect in getting best results)Tj
+T*
+0.0133 Tc
+0.1335 Tw
+(even in exams. Inconsistent values of the first and)Tj
+T*
+0.0139 Tc
+0.1387 Tw
+(second components suggest they are not important)Tj
+T*
+0.0221 Tc
+0.2206 Tw
+(variables or their preparation has not been done)Tj
+T*
+-0.0046 Tc
+0 Tw
+(properly.)Tj
+0 -2.2 TD
+0.0163 Tc
+0.1632 Tw
+(From Table 4, we can discover three of the most)Tj
+0 -1.1 TD
+0.0313 Tc
+0.3133 Tw
+(significant factors in assigning a country to a)Tj
+T*
+0.0119 Tc
+0.1191 Tw
+(particular category. These are the variables )Tj
+/TT8 1 Tf
+18.8 0 TD
+-0.0257 Tc
+0 Tw
+(Health:)Tj
+-18.8 -1.1 TD
+0.0154 Tc
+0.1539 Tw
+(Infant Mortality)Tj
+/TT4 1 Tf
+6.9 0 TD
+0.0455 Tc
+0 Tw
+(, )Tj
+/TT8 1 Tf
+1.1 0 TD
+0.0172 Tc
+0.1721 Tw
+(Health: Population per Doctor)Tj
+/TT4 1 Tf
+13.4301 0 TD
+0 Tc
+0 Tw
+(,)Tj
+/TT8 1 Tf
+-21.4301 -1.1 TD
+0.0147 Tc
+0.1466 Tw
+(Education: Illiteracy Rate)Tj
+/TT4 1 Tf
+11.2 0 TD
+0.0402 Tc
+0.4024 Tw
+(, and )Tj
+/TT8 1 Tf
+3.3 0 TD
+0.028 Tc
+0.2799 Tw
+(Phones per 100)Tj
+-14.5 -1.1 TD
+0.0212 Tc
+0 Tw
+(Inhabitants)Tj
+/TT4 1 Tf
+4.7889 0 TD
+0.0076 Tc
+0.0757 Tw
+(. We achieved the same results by using)Tj
+-4.7889 -1.1 TD
+0.0193 Tc
+0.1933 Tw
+(the method of sensitivity analysis for the trained)Tj
+T*
+-0.0016 Tc
+0 Tw
+(neural network. )Tj
+0 -2.2 TD
+0.0112 Tc
+0.1122 Tw
+(We found more interesting results in extracting the)Tj
+0 -1.1 TD
+0.0044 Tc
+0.0444 Tw
+(most significant variables by applying the tree-based)Tj
+/TT2 1 Tf
+9 0 0 9 318 735 Tm
+0.0572 Tc
+0.5724 Tw
+(Class of)Tj
+ET
+311 748 1 -27 re
+f
+311 748 62 -1 re
+f
+BT
+9 0 0 9 318 726 Tm
+0.0558 Tc
+0 Tw
+(GDP)Tj
+ET
+311 748 1 -27 re
+f
+BT
+9 0 0 9 380 735 Tm
+0.1111 Tc
+(Low)Tj
+ET
+373 747 1 -26 re
+f
+373 748 31 -1 re
+f
+BT
+9 0 0 9 380 726 Tm
+0.0558 Tc
+(GDP)Tj
+ET
+373 748 1 -27 re
+f
+BT
+9 0 0 9 411 735 Tm
+0.0889 Tc
+(LowMid)Tj
+ET
+404 747 1 -26 re
+f
+404 748 47 -1 re
+f
+BT
+9 0 0 9 411 726 Tm
+0.0558 Tc
+(GDP)Tj
+ET
+404 748 1 -27 re
+f
+BT
+9 0 0 9 458 735 Tm
+0.0972 Tc
+(UpMid)Tj
+ET
+451 747 1 -26 re
+f
+451 748 41 -1 re
+f
+BT
+9 0 0 9 458 726 Tm
+0.0558 Tc
+(GDP)Tj
+ET
+451 748 1 -27 re
+f
+BT
+9 0 0 9 499 735 Tm
+0.148 Tc
+(High)Tj
+ET
+492 747 1 -26 re
+f
+525 748 1 -27 re
+f
+492 748 34 -1 re
+f
+BT
+9 0 0 9 499 726 Tm
+0.0558 Tc
+(GDP)Tj
+ET
+492 748 1 -27 re
+f
+525 748 1 -27 re
+f
+BT
+/TT4 1 Tf
+9 0 0 9 318 708 Tm
+0.0107 Tc
+0.1063 Tw
+(Popul. Urban)Tj
+ET
+311 721 1 -18 re
+f
+311 721 62 -1 re
+f
+1 g
+311 702 62 2 re
+f
+0 g
+311 704 1 -2 re
+f
+BT
+10 0 0 10 383 707 Tm
+0.0167 Tc
+0 Tw
+(0.17)Tj
+ET
+373 720 1 -17 re
+f
+373 721 31 -1 re
+f
+BT
+10 0 0 10 430 707 Tm
+(0.18)Tj
+ET
+404 720 1 -17 re
+f
+404 721 47 -1 re
+f
+BT
+10 0 0 10 471 707 Tm
+(0.34)Tj
+ET
+451 720 1 -17 re
+f
+451 721 41 -1 re
+f
+BT
+10 0 0 10 505 707 Tm
+(0.39)Tj
+ET
+492 720 1 -17 re
+f
+525 721 1 -18 re
+f
+492 721 34 -1 re
+f
+BT
+9 0 0 9 318 691 Tm
+0.0041 Tc
+0.0408 Tw
+(Total Labour)Tj
+ET
+311 703 1 -19 re
+f
+311 703 62 -1 re
+f
+1 g
+311 683 62 3 re
+f
+0 g
+311 686 1 -3 re
+f
+BT
+10 0 0 10 383 690 Tm
+0.0071 Tc
+0 Tw
+(0.51 )Tj
+ET
+373 702 1 -18 re
+f
+373 703 31 -1 re
+f
+BT
+10 0 0 10 430 690 Tm
+0.0167 Tc
+(0.33)Tj
+ET
+404 702 1 -18 re
+f
+404 703 47 -1 re
+f
+BT
+10 0 0 10 471 690 Tm
+(0.37)Tj
+ET
+451 702 1 -18 re
+f
+451 703 41 -1 re
+f
+BT
+10 0 0 10 505 690 Tm
+(0.27)Tj
+ET
+492 702 1 -18 re
+f
+525 703 1 -19 re
+f
+492 703 34 -1 re
+f
+BT
+9 0 0 9 318 672 Tm
+0.0052 Tc
+0.0518 Tw
+(Agric. Labour)Tj
+ET
+311 684 1 -19 re
+f
+311 684 62 -1 re
+f
+1 g
+311 665 62 2 re
+f
+0 g
+311 667 1 -2 re
+f
+BT
+10 0 0 10 383 671 Tm
+0.0167 Tc
+0 Tw
+(0.50)Tj
+ET
+373 683 1 -18 re
+f
+373 684 31 -1 re
+f
+BT
+10 0 0 10 430 671 Tm
+(0.32)Tj
+ET
+404 683 1 -18 re
+f
+404 684 47 -1 re
+f
+BT
+10 0 0 10 471 671 Tm
+(0.27)Tj
+ET
+451 683 1 -18 re
+f
+451 684 41 -1 re
+f
+BT
+10 0 0 10 505 671 Tm
+(0.09)Tj
+ET
+492 683 1 -18 re
+f
+525 684 1 -19 re
+f
+492 684 34 -1 re
+f
+BT
+9 0 0 9 318 652 Tm
+0.016 Tc
+0.1598 Tw
+(Infant Mort.)Tj
+ET
+311 665 1 -19 re
+f
+311 665 62 -1 re
+f
+1 g
+311 646 62 2 re
+f
+0 g
+311 648 1 -2 re
+f
+BT
+10 0 0 10 383 651 Tm
+0.0167 Tc
+0 Tw
+(0.59)Tj
+ET
+373 664 1 -18 re
+f
+373 665 31 -1 re
+f
+BT
+10 0 0 10 430 651 Tm
+(0.42)Tj
+ET
+404 664 1 -18 re
+f
+404 665 47 -1 re
+f
+BT
+10 0 0 10 471 651 Tm
+(0.26)Tj
+ET
+451 664 1 -18 re
+f
+451 665 41 -1 re
+f
+BT
+10 0 0 10 505 651 Tm
+(0.12)Tj
+ET
+492 664 1 -18 re
+f
+525 665 1 -19 re
+f
+492 665 34 -1 re
+f
+BT
+9 0 0 9 318 633 Tm
+0.0112 Tc
+0.1119 Tw
+(Health Exp.)Tj
+ET
+311 646 1 -19 re
+f
+311 646 62 -1 re
+f
+1 g
+311 627 62 2 re
+f
+0 g
+311 629 1 -2 re
+f
+BT
+10 0 0 10 383 632 Tm
+0.0167 Tc
+0 Tw
+(0.11)Tj
+ET
+373 645 1 -18 re
+f
+373 646 31 -1 re
+f
+BT
+10 0 0 10 430 632 Tm
+(0.18)Tj
+ET
+404 645 1 -18 re
+f
+404 646 47 -1 re
+f
+BT
+10 0 0 10 471 632 Tm
+(0.15)Tj
+ET
+451 645 1 -18 re
+f
+451 646 41 -1 re
+f
+BT
+10 0 0 10 505 632 Tm
+(0.15)Tj
+ET
+492 645 1 -18 re
+f
+525 646 1 -19 re
+f
+492 646 34 -1 re
+f
+BT
+9 0 0 9 318 614 Tm
+0.0226 Tc
+(Doctor)Tj
+ET
+311 627 1 -18 re
+f
+311 627 62 -1 re
+f
+1 g
+311 608 62 2 re
+f
+0 g
+311 610 1 -2 re
+f
+BT
+10 0 0 10 383 613 Tm
+0.0167 Tc
+(0.82)Tj
+ET
+373 626 1 -17 re
+f
+373 627 31 -1 re
+f
+BT
+10 0 0 10 430 613 Tm
+(0.60)Tj
+ET
+404 626 1 -17 re
+f
+404 627 47 -1 re
+f
+BT
+10 0 0 10 471 613 Tm
+(0.27)Tj
+ET
+451 626 1 -17 re
+f
+451 627 41 -1 re
+f
+BT
+10 0 0 10 505 613 Tm
+(0.12)Tj
+ET
+492 626 1 -17 re
+f
+525 627 1 -18 re
+f
+492 627 34 -1 re
+f
+BT
+9 0 0 9 318 597 Tm
+-0.0027 Tc
+(Safe Water)Tj
+ET
+311 609 1 -19 re
+f
+311 609 62 -1 re
+f
+1 g
+311 589 62 3 re
+f
+0 g
+311 592 1 -3 re
+f
+BT
+10 0 0 10 383 596 Tm
+0.0167 Tc
+(0.08)Tj
+ET
+373 608 1 -18 re
+f
+373 609 31 -1 re
+f
+BT
+10 0 0 10 430 596 Tm
+(0.13)Tj
+ET
+404 608 1 -18 re
+f
+404 609 47 -1 re
+f
+BT
+10 0 0 10 471 596 Tm
+(0.16)Tj
+ET
+451 608 1 -18 re
+f
+451 609 41 -1 re
+f
+BT
+10 0 0 10 505 596 Tm
+(0.18)Tj
+ET
+492 608 1 -18 re
+f
+525 609 1 -19 re
+f
+492 609 34 -1 re
+f
+BT
+9 0 0 9 318 578 Tm
+0.0099 Tc
+0.0989 Tw
+(Illit. Rate )Tj
+ET
+311 590 1 -19 re
+f
+311 590 62 -1 re
+f
+1 g
+311 570 62 3 re
+f
+0 g
+311 573 1 -3 re
+f
+BT
+10 0 0 10 383 577 Tm
+0.0167 Tc
+0 Tw
+(0.63)Tj
+ET
+373 589 1 -18 re
+f
+373 590 31 -1 re
+f
+BT
+10 0 0 10 430 577 Tm
+(0.44)Tj
+ET
+404 589 1 -18 re
+f
+404 590 47 -1 re
+f
+BT
+10 0 0 10 471 577 Tm
+(0.31)Tj
+ET
+451 589 1 -18 re
+f
+451 590 41 -1 re
+f
+BT
+10 0 0 10 505 577 Tm
+(0.26)Tj
+ET
+492 589 1 -18 re
+f
+525 590 1 -19 re
+f
+492 590 34 -1 re
+f
+BT
+9 0 0 9 318 559 Tm
+0 Tc
+(Educ. Exp. )Tj
+ET
+311 571 1 -19 re
+f
+311 571 62 -1 re
+f
+1 g
+311 552 62 2 re
+f
+0 g
+311 554 1 -2 re
+f
+BT
+10 0 0 10 383 558 Tm
+0.0167 Tc
+(0.10)Tj
+ET
+373 570 1 -18 re
+f
+373 571 31 -1 re
+f
+BT
+10 0 0 10 430 558 Tm
+(0.13)Tj
+ET
+404 570 1 -18 re
+f
+404 571 47 -1 re
+f
+BT
+10 0 0 10 471 558 Tm
+(0.16)Tj
+ET
+451 570 1 -18 re
+f
+451 571 41 -1 re
+f
+BT
+10 0 0 10 505 558 Tm
+(0.09)Tj
+ET
+492 570 1 -18 re
+f
+525 571 1 -19 re
+f
+492 571 34 -1 re
+f
+BT
+9 0 0 9 318 539 Tm
+0.0113 Tc
+(AverageFood)Tj
+ET
+311 552 1 -19 re
+f
+311 552 62 -1 re
+f
+1 g
+311 533 62 2 re
+f
+0 g
+311 535 1 -2 re
+f
+BT
+10 0 0 10 383 538 Tm
+0.0167 Tc
+(0.48)Tj
+ET
+373 551 1 -18 re
+f
+373 552 31 -1 re
+f
+BT
+10 0 0 10 430 538 Tm
+(0.46)Tj
+ET
+404 551 1 -18 re
+f
+404 552 47 -1 re
+f
+BT
+10 0 0 10 471 538 Tm
+(0.52)Tj
+ET
+451 551 1 -18 re
+f
+451 552 41 -1 re
+f
+BT
+10 0 0 10 505 538 Tm
+(0.34)Tj
+ET
+492 551 1 -18 re
+f
+525 552 1 -19 re
+f
+492 552 34 -1 re
+f
+BT
+9 0 0 9 318 520 Tm
+0.0052 Tc
+0.0526 Tw
+(Phone %)Tj
+ET
+311 533 1 -18 re
+f
+311 533 62 -1 re
+f
+1 g
+311 514 62 2 re
+f
+0 g
+311 516 1 -2 re
+f
+BT
+10 0 0 10 383 519 Tm
+0.0167 Tc
+0 Tw
+(0.02)Tj
+ET
+373 532 1 -17 re
+f
+373 533 31 -1 re
+f
+BT
+10 0 0 10 430 519 Tm
+(0.04)Tj
+ET
+404 532 1 -17 re
+f
+404 533 47 -1 re
+f
+BT
+10 0 0 10 471 519 Tm
+(0.11)Tj
+ET
+451 532 1 -17 re
+f
+451 533 41 -1 re
+f
+BT
+10 0 0 10 505 519 Tm
+(0.34)Tj
+ET
+492 532 1 -17 re
+f
+525 533 1 -18 re
+f
+492 533 34 -1 re
+f
+BT
+9 0 0 9 318 503 Tm
+0.0147 Tc
+0.1464 Tw
+(Total Pop.)Tj
+ET
+311 515 1 -19 re
+f
+311 515 62 -1 re
+f
+1 g
+311 495 62 3 re
+f
+0 g
+311 498 1 -3 re
+f
+BT
+10 0 0 10 383 502 Tm
+0.0167 Tc
+0 Tw
+(0.32)Tj
+ET
+373 514 1 -18 re
+f
+373 515 31 -1 re
+f
+BT
+10 0 0 10 430 502 Tm
+(0.29)Tj
+ET
+404 514 1 -18 re
+f
+404 515 47 -1 re
+f
+BT
+10 0 0 10 471 502 Tm
+(0.27)Tj
+ET
+451 514 1 -18 re
+f
+451 515 41 -1 re
+f
+BT
+10 0 0 10 505 502 Tm
+(0.13)Tj
+ET
+492 514 1 -18 re
+f
+525 515 1 -19 re
+f
+492 515 34 -1 re
+f
+BT
+9 0 0 9 318 484 Tm
+0.0019 Tc
+0.019 Tw
+(Avg Growth )Tj
+ET
+311 496 1 -19 re
+f
+311 496 62 -1 re
+f
+1 g
+311 476 62 3 re
+f
+0 g
+311 479 1 -3 re
+f
+BT
+10 0 0 10 383 483 Tm
+0.0167 Tc
+0 Tw
+(0.09)Tj
+ET
+373 495 1 -18 re
+f
+373 496 31 -1 re
+f
+BT
+10 0 0 10 430 483 Tm
+(0.09)Tj
+ET
+404 495 1 -18 re
+f
+404 496 47 -1 re
+f
+BT
+10 0 0 10 471 483 Tm
+(0.09)Tj
+ET
+451 495 1 -18 re
+f
+451 496 41 -1 re
+f
+BT
+10 0 0 10 505 483 Tm
+(0.10)Tj
+ET
+492 495 1 -18 re
+f
+525 496 1 -19 re
+f
+492 496 34 -1 re
+f
+BT
+9 0 0 9 318 465 Tm
+0.0371 Tc
+(Density)Tj
+ET
+311 477 1 -20 re
+f
+311 477 62 -1 re
+f
+1 g
+311 457 62 2 re
+f
+0 g
+311 459 1 -2 re
+f
+311 458 62 -1 re
+f
+BT
+10 0 0 10 383 464 Tm
+0.0167 Tc
+(0.13)Tj
+ET
+373 476 1 -18 re
+f
+373 477 31 -1 re
+f
+373 458 31 -1 re
+f
+BT
+10 0 0 10 430 464 Tm
+(0.12)Tj
+ET
+404 476 1 -18 re
+f
+404 477 47 -1 re
+f
+404 458 47 -1 re
+f
+BT
+10 0 0 10 471 464 Tm
+(0.13)Tj
+ET
+451 476 1 -18 re
+f
+451 477 41 -1 re
+f
+451 458 41 -1 re
+f
+BT
+10 0 0 10 505 464 Tm
+(0.30)Tj
+ET
+492 476 1 -18 re
+f
+525 477 1 -20 re
+f
+492 477 34 -1 re
+f
+492 458 34 -1 re
+f
+q
+309 448 218 300 re
+W n
+BT
+12 0 0 12 311 448 Tm
+0 Tc
+( )Tj
+ET
+Q
+BT
+8 0 0 8 311 766 Tm
+0.0044 Tc
+0.0436 Tw
+(Table 4. Centers of clusters for GNP prediction extracted by)Tj
+3.625 -1 TD
+0.0105 Tc
+0 Tw
+(BDNN.)Tj
+10 0 0 10 310 439 Tm
+0.0076 Tc
+0.0763 Tw
+(algorithm C4.5 [11] on GNP data set. The final tree)Tj
+0 -1.1 TD
+0.004 Tc
+0.0403 Tw
+(correctly classified 82% of the training data and 62%)Tj
+T*
+0.0137 Tc
+0.137 Tw
+(of the test data. The tree had only three variables:)Tj
+/TT8 1 Tf
+T*
+0.0124 Tc
+0.1238 Tw
+(Health: Population per Doctor)Tj
+/TT4 1 Tf
+13.146 0 TD
+0.0081 Tc
+0.0805 Tw
+(, then the number of)Tj
+/TT8 1 Tf
+-13.146 -1.1 TD
+0.0022 Tc
+0.0215 Tw
+(Phones per 100 Inhabitants)Tj
+/TT4 1 Tf
+11.3 0 TD
+0.0117 Tc
+0.1172 Tw
+[( , and if still we can not)]TJ
+-11.3 -1.1 TD
+0.0077 Tc
+0.0773 Tw
+(categorise, we will look at the )Tj
+/TT8 1 Tf
+12.9563 0 TD
+0.0162 Tc
+0.1619 Tw
+(Education: Illiteracy)Tj
+-12.9563 -1.1 TD
+0.0034 Tc
+0 Tw
+(Rate)Tj
+/TT4 1 Tf
+1.8461 0 TD
+0.001 Tc
+0.01 Tw
+[( of the country.)]TJ
+/TT2 1 Tf
+12 0 0 12 310 350 Tm
+0.0454 Tc
+0.4546 Tw
+(6. Discussion)Tj
+/TT4 1 Tf
+10 0 0 10 310 326 Tm
+0.0281 Tc
+0.2812 Tw
+(Prototypes are useful when to assign values to)Tj
+0 -1.1 TD
+0.0096 Tc
+0.0962 Tw
+(components of input patterns for which the value is)Tj
+T*
+0.0163 Tc
+0.1633 Tw
+(unknown. We can use the cluster center found by)Tj
+T*
+0.0325 Tc
+0.3255 Tw
+(BDNN to assign the most likely value for an)Tj
+T*
+0.0005 Tc
+0.0055 Tw
+(unknown value.)Tj
+0 -2.2 TD
+0.0112 Tc
+0.1117 Tw
+(Applications of BDNNs in explaining properties of)Tj
+0 -1.1 TD
+-0.0023 Tc
+0 Tw
+(category classification in various science domains will)Tj
+T*
+0.0112 Tc
+0.1115 Tw
+(help researchers to improve current techniques. For)Tj
+T*
+0.0067 Tc
+0.067 Tw
+(example, Cardiologists will be able to extract in real)Tj
+T*
+0.0193 Tc
+0.1925 Tw
+(time the optimum templates used as standards of)Tj
+T*
+0.0263 Tc
+0.2631 Tw
+(normality for segments of different ECG signal)Tj
+T*
+-0.0007 Tc
+0 Tw
+(records which in turn could be different from a patient)Tj
+T*
+0.0043 Tc
+0.0426 Tw
+(to the next. )Tj
+0 -2.2 TD
+0.0221 Tc
+0.221 Tw
+(A prototype is an example with all the essential)Tj
+0 -1.1 TD
+0.0157 Tc
+0.1565 Tw
+(attributes of good members of a category [12,13].)Tj
+T*
+0.0204 Tc
+0.2041 Tw
+(Neural networks which have been trained by the)Tj
+T*
+0.0084 Tc
+0.084 Tw
+(traditional error back-propagation algorithm can not)Tj
+T*
+-0.0056 Tc
+0 Tw
+(provide prototypes for the user. We have demonstrated)Tj
+T*
+0.019 Tc
+0.1902 Tw
+(that BDNNs are able to provide such prototypes.)Tj
+T*
+0.0134 Tc
+0.1336 Tw
+(These prototypes may then be used to enhance the)Tj
+T*
+0.0015 Tc
+0.0149 Tw
+(learning and generalisation ability of neural networks.)Tj
+ET
+endstream
+endobj
+38 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT8 7 0 R
+>>
+/ExtGState <<
+/GS1 8 0 R
+>>
+>>
+endobj
+40 0 obj
+<<
+/Length 9886
+>>
+stream
+BT
+/TT4 1 Tf
+10 0 0 10 77 763 Tm
+0 g
+/GS1 gs
+0.0036 Tc
+0.0359 Tw
+(According to Rosch, the ability to finding prototypes)Tj
+0 -1.1 TD
+0.0135 Tc
+0.1352 Tw
+(provide better human memories because there is a)Tj
+T*
+0.0005 Tc
+0.0049 Tw
+(tendency among people to abstract such characteristic)Tj
+T*
+-0.0003 Tc
+0 Tw
+(vectors with exemplars of a concept. )Tj
+/TT2 1 Tf
+12 0 0 12 77 707 Tm
+0.0404 Tc
+0.4039 Tw
+(7. Conclusion)Tj
+/TT4 1 Tf
+10 0 0 10 77 683 Tm
+0.0149 Tc
+0.1491 Tw
+(We have shown how BDNNs can be trained by a)Tj
+T*
+0.0296 Tc
+0.2957 Tw
+(generalised error back-propagation algorithm to)Tj
+T*
+0.006 Tc
+0.0598 Tw
+(provide the capabilities of associative memories and)Tj
+T*
+0.0261 Tc
+0.2605 Tw
+(cluster centroid finders. Experimental results of)Tj
+T*
+0.0248 Tc
+0.2484 Tw
+(applying BDNNs to artificial data sets and two)Tj
+T*
+0.003 Tc
+0.0302 Tw
+(multivariate real world problems have revealed some)Tj
+T*
+0.0016 Tc
+0.0165 Tw
+(of the abilities of BDNNs. )Tj
+0 -2.2 TD
+0.0265 Tc
+0.2653 Tw
+(Our method can also be used to enhance other)Tj
+0 -1.1 TD
+0.0179 Tc
+0.179 Tw
+(techniques, for example using sensitivity analysis)Tj
+T*
+0.0373 Tc
+0.3728 Tw
+(with a BDNN. It is possible to measure the)Tj
+T*
+0.0036 Tc
+0.0362 Tw
+(sensitivity of input values to output values as well as)Tj
+T*
+0.0063 Tc
+0.0626 Tw
+(that of output values to input values. Our method of)Tj
+T*
+-0.0028 Tc
+0 Tw
+(training bidirectional neural networks to learn both the)Tj
+T*
+0.0044 Tc
+0.0441 Tw
+(forward and reverse tasks at the same time will yield)Tj
+T*
+0.0182 Tc
+0.1819 Tw
+(more powerful neural networks. The bidirectional)Tj
+T*
+0.013 Tc
+0.1296 Tw
+(learning aggregate gradient tends to be flatter. We)Tj
+T*
+0.002 Tc
+0.0195 Tw
+(believe this may result in networks less susceptible to)Tj
+T*
+-0.0043 Tc
+0 Tw
+(noise and providing better generalisation.)Tj
+0 -2.2 TD
+0.0305 Tc
+0.3053 Tw
+(It also should be noted that another important)Tj
+0 -1.1 TD
+0.0033 Tc
+0.0335 Tw
+(advantage of using bidirectional neural networks will)Tj
+T*
+0.0163 Tc
+0.1631 Tw
+(be their application in control systems, where the)Tj
+T*
+-0.0068 Tc
+0 Tw
+(effect of a desireable change in outputs can provide the)Tj
+T*
+-0.0007 Tc
+(appropriate change in input values.)Tj
+0 -2.2 TD
+0.0259 Tc
+0.2594 Tw
+(We believe that the trained bidirectional neural)Tj
+0 -1.1 TD
+0.0123 Tc
+0.1226 Tw
+(networks will help us in solving the bottle-neck of)Tj
+T*
+0.0126 Tc
+0.1261 Tw
+(acceptance and use of neural networks. This is the)Tj
+T*
+0.0166 Tc
+0.1659 Tw
+(need to understand the contents of the black box,)Tj
+T*
+0.0043 Tc
+0.0428 Tw
+(hence extracting meaning from the trained networks.)Tj
+T*
+0.0029 Tc
+0.0285 Tw
+(Our extracted class prototypes can be used to analyse)Tj
+T*
+0.0207 Tc
+0.2072 Tw
+(data sets and abstract the training set for human)Tj
+T*
+0.0382 Tc
+0.3819 Tw
+(comprehension. We have also used the class)Tj
+T*
+0.0177 Tc
+0.1765 Tw
+(prototypes in designing effective data preparation)Tj
+T*
+-0.0074 Tc
+0 Tw
+(techniques to reduce the generalisation error. )Tj
+/TT2 1 Tf
+12 0 0 12 77 275 Tm
+0.056 Tc
+(References)Tj
+/TT4 1 Tf
+10 0 0 10 77 251 Tm
+0.0079 Tc
+0.0793 Tw
+[( )92.4([)13.1(1)13.1(])-491.7(Bochereau, L and Bourgine, P ìExpert systems)]TJ
+1.9 -1.1 TD
+0.0075 Tc
+0.0745 Tw
+(made with neural networks,î )Tj
+/TT8 1 Tf
+12.4 0 TD
+-0.007 Tc
+0 Tw
+(International Joint)Tj
+-12.4 -1.1 TD
+-0.0076 Tc
+(Conference on Neural Networks)Tj
+/TT4 1 Tf
+12.8 0 TD
+0.0068 Tc
+0.0683 Tw
+(, vol. 2, pp. 579-)Tj
+-12.8 -1.1 TD
+0.0067 Tc
+0.0667 Tw
+(582, 1990. )Tj
+-1.9 -1.1 TD
+0.0014 Tc
+0.0136 Tw
+[( )20.2([)6.6(2)6.6(])-498.2(Edelman, GM, Gall, WE and Cowan, WM \(eds.\))]TJ
+/TT8 1 Tf
+1.9 -1.1 TD
+0.0037 Tc
+0.0371 Tw
+(Synaptic Function, )Tj
+/TT4 1 Tf
+7.9482 0 TD
+0.003 Tc
+0.0304 Tw
+(New York: Wiley, 1987. )Tj
+-9.8482 -1.1 TD
+0.0288 Tc
+0.2879 Tw
+[( )321.9([)34(3)34(])-470.8(Gallant, SI ìConnectionist expert systems,î)]TJ
+/TT8 1 Tf
+1.9 -1.1 TD
+0.0178 Tc
+0.1783 Tw
+(Communications of the ACM)Tj
+/TT4 1 Tf
+12.7 0 TD
+0.0191 Tc
+0.1915 Tw
+(, vol. 31, no. 2,)Tj
+-12.7 -1.1 TD
+0.0059 Tc
+0.0587 Tw
+(pp. 152-169, 1988.)Tj
+-1.9 -1.1 TD
+0.0026 Tc
+0.0256 Tw
+[( )33.4([)7.8(4)7.8(])-497(Gedeon, TD and Bowden, TG ìHeuristic pattern)]TJ
+1.9 -1.1 TD
+0.0133 Tc
+0 Tw
+(reduction,î )Tj
+/TT8 1 Tf
+5.1 0 TD
+0.0172 Tc
+0.1717 Tw
+(International Joint Conference on)Tj
+-5.1 -1.1 TD
+0.004 Tc
+0.0398 Tw
+(Neural Networks)Tj
+/TT4 1 Tf
+6.9055 0 TD
+0.0025 Tc
+0.0248 Tw
+(, Beijing, pp. 449-453, 1992.)Tj
+14.4945 63.3 TD
+0.0073 Tc
+0.0729 Tw
+[( )85.4([)12.5(5)12.5(])-492.3(Gedeon, TD and Turner, H ìExplaining student)]TJ
+1.9 -1.1 TD
+0.0495 Tc
+0.4952 Tw
+(grades predicted by a neural network,î)Tj
+/TT8 1 Tf
+T*
+0.0121 Tc
+0.121 Tw
+(Proceedings International Joint Conference on)Tj
+T*
+0.0039 Tc
+0.0388 Tw
+(Neural Networks)Tj
+/TT4 1 Tf
+6.903 0 TD
+0.0024 Tc
+0.0235 Tw
+(, pp. 609-612, 1993.)Tj
+-8.803 -1.1 TD
+0.0776 Tc
+0.7758 Tw
+[( )858.6([)82.8(6)82.8(])-422(Hecht-Nielsen, R ìCounterpropagation)]TJ
+1.9 -1.1 TD
+0.0081 Tc
+0 Tw
+(Networks,î )Tj
+/TT8 1 Tf
+5.0021 0 TD
+0.0065 Tc
+0.0651 Tw
+(Applied Optics, )Tj
+/TT4 1 Tf
+6.7979 0 TD
+0.0168 Tc
+0.1676 Tw
+(vol. 26, no. 3, pp.)Tj
+-11.8 -1.1 TD
+0.0046 Tc
+0.0465 Tw
+(4979-4984, 1987. )Tj
+-1.9 -1.1 TD
+0.0156 Tc
+0.1563 Tw
+[( )177.1([)20.8(7)20.8(])-484(Hora, N, Enbutsu, I and Baba, K ìFuzzy rule)]TJ
+1.9 -1.1 TD
+0.0128 Tc
+0.1279 Tw
+(extraction from a multilayer neural net,î )Tj
+/TT8 1 Tf
+17.8 0 TD
+-0.0234 Tc
+0 Tw
+(Proc.)Tj
+-17.8 -1.1 TD
+0.0197 Tc
+(IEEE)Tj
+/TT4 1 Tf
+2.2443 0 TD
+0.0051 Tc
+0.0513 Tw
+(, vol. 2, pp. 461-465, 1991.)Tj
+-4.1443 -1.1 TD
+0.0094 Tc
+0.0942 Tw
+[( )108.8([)14.6(8)14.6(])-490.2(Kandel, ER, Siegelbaum, SA and Schwartz, JH)]TJ
+1.9 -1.1 TD
+0.0153 Tc
+0.1535 Tw
+(ìSynaptic Transmission,î )Tj
+/TT8 1 Tf
+11.3 0 TD
+0.0111 Tc
+0.1114 Tw
+(Principles of Neural)Tj
+-11.3 -1.1 TD
+0.0075 Tc
+0 Tw
+(Sciences)Tj
+/TT4 1 Tf
+3.5024 0 TD
+0.003 Tc
+0.0299 Tw
+(, 1991.)Tj
+-5.4024 -1.1 TD
+0.0035 Tc
+0.0347 Tw
+[( )43.4([)8.7(9)8.7(])-496.1(Kosko, B ìBidirectional Associative Memories,î)]TJ
+/TT8 1 Tf
+1.9 -1.1 TD
+0.0364 Tc
+0.3637 Tw
+(IEEE Transactions on Systems, Man, and)Tj
+T*
+0.0124 Tc
+0 Tw
+(Cybernetics,)Tj
+/TT4 1 Tf
+5.1752 0 TD
+0.0047 Tc
+0.0469 Tw
+[( vol. SMC-18, pp. 49-60, 1988.)]TJ
+-7.0752 -1.1 TD
+-0.0218 Tc
+0 Tw
+([10])Tj
+2.2 0 TD
+0.0042 Tc
+0.0421 Tw
+(Kosko, B. )Tj
+/TT8 1 Tf
+4.5 0 TD
+0.0016 Tc
+0.0157 Tw
+(Neural Networks and Fuzzy Systems:)Tj
+-4.5 -1.1 TD
+0.0201 Tc
+0.2008 Tw
+(A Dynamical Systems Approach to Machine)Tj
+T*
+0.0586 Tc
+0 Tw
+(Intelligence,)Tj
+/TT4 1 Tf
+5.7315 0 TD
+0.0315 Tc
+0.3154 Tw
+[( Prince-Hall, Inc., Englewood)]TJ
+-5.7315 -1.1 TD
+0.0066 Tc
+0.0665 Tw
+(Cliffs, NJ, USA, 1992. )Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([11])Tj
+2.2 0 TD
+0.0411 Tc
+0.4105 Tw
+(Quinlan, JR )Tj
+/TT8 1 Tf
+6.4 0 TD
+0.0261 Tc
+0.261 Tw
+(C4.5: Programs for Machine)Tj
+-6.4 -1.1 TD
+0.0775 Tc
+0 Tw
+(Learning,)Tj
+/TT4 1 Tf
+4.6145 0 TD
+0.0385 Tc
+0.3853 Tw
+[( SanMateo, California: Morgan)]TJ
+-4.6145 -1.1 TD
+0.0012 Tc
+0.0124 Tw
+(Kaufmann, 1993.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([12])Tj
+2.2 0 TD
+0.0707 Tc
+0.7065 Tw
+(Rosch, E and Mervis, CB ìFamily)Tj
+0 -1.1 TD
+0.0331 Tc
+0.3309 Tw
+(Resemblances: Studies in the structure of)Tj
+T*
+0.0116 Tc
+0 Tw
+(Categories,î )Tj
+/TT8 1 Tf
+5.4872 0 TD
+0.0112 Tc
+0.1124 Tw
+(Cognitive Psychology )Tj
+/TT4 1 Tf
+9.4576 0 TD
+0.0074 Tc
+0.074 Tw
+(7, pp. 573-)Tj
+-14.9448 -1.1 TD
+0.0079 Tc
+0.0789 Tw
+(605, 1975.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([13])Tj
+2.2 0 TD
+0.0253 Tc
+0.2526 Tw
+(Rosch, E ìPrinciples of categorization,î In)Tj
+/TT8 1 Tf
+0 -1.1 TD
+0.0372 Tc
+0.3719 Tw
+(Eleanor Rosch and Barbara Lloyd, eds.,)Tj
+T*
+-0.0018 Tc
+0 Tw
+(Cognition and Categorization.)Tj
+/TT4 1 Tf
+12.3 0 TD
+0.0062 Tc
+0.062 Tw
+[( Hillsdale,NJ. pp.)]TJ
+-12.3 -1.1 TD
+0.0056 Tc
+0.0558 Tw
+(27-48, 1978.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([14])Tj
+2.2 0 TD
+0.0106 Tc
+0.106 Tw
+(Rumelhart, DE, Hinton, GE and Williams, RJ)Tj
+0 -1.1 TD
+0.0292 Tc
+0.2925 Tw
+(ìLearning internal representations by error)Tj
+T*
+0.015 Tc
+0.1497 Tw
+(propagation,î in Rumelhart, DE, McClelland,)Tj
+/TT8 1 Tf
+T*
+-0.0078 Tc
+0 Tw
+(ìParallel distributed processing,)Tj
+/TT4 1 Tf
+13.1 0 TD
+0.0208 Tc
+0.2081 Tw
+(î Vol. 1, MIT)Tj
+-13.1 -1.1 TD
+0.0066 Tc
+0.0665 Tw
+(Press, 1986.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([15])Tj
+2.2 0 TD
+0.0011 Tc
+0.0111 Tw
+(Slade, P and Gedeon, TD ìBimodal Distribution)Tj
+0 -1.1 TD
+0.0235 Tc
+0 Tw
+(Removal,î )Tj
+/TT8 1 Tf
+5.1 0 TD
+0.0103 Tc
+0.103 Tw
+(Proceedings IWANN International)Tj
+-5.1 -1.1 TD
+0.0222 Tc
+0.2217 Tw
+(Conference on Neural Networks)Tj
+/TT4 1 Tf
+14.3 0 TD
+0.0189 Tc
+0.189 Tw
+(, Barcelona,)Tj
+-14.3 -1.1 TD
+0.0125 Tc
+0 Tw
+(1993.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+([16])Tj
+2.2 0 TD
+0.0019 Tc
+0.0187 Tw
+(Towell, GG and Shavlik, JW ìThe extraction of)Tj
+0 -1.1 TD
+0.0286 Tc
+0.2859 Tw
+(refined rules from knowledge-based neural)Tj
+T*
+-0.0021 Tc
+0 Tw
+(networks,î )Tj
+/TT8 1 Tf
+4.5868 0 TD
+-0.0022 Tc
+(Machine Learning, )Tj
+/TT4 1 Tf
+7.8759 0 TD
+-0.0028 Tc
+(1991.)Tj
+-14.6627 -1.1 TD
+-0.0218 Tc
+([17])Tj
+2.2 0 TD
+0.0001 Tc
+0.0008 Tw
+(Turner, H and Gedeon, TD ìExtracting Meaning)Tj
+0 -1.1 TD
+0.0275 Tc
+0.2747 Tw
+(from Neural Networks,î )Tj
+/TT8 1 Tf
+11.4532 0 TD
+0.0409 Tc
+0.4094 Tw
+(Proceedings 13th)Tj
+-11.4532 -1.1 TD
+-0.0096 Tc
+0 Tw
+(International Conference on AI)Tj
+/TT4 1 Tf
+12.4 0 TD
+0.0086 Tc
+0.0859 Tw
+(, vol. 1, pp. 243-)Tj
+-12.4 -1.1 TD
+0.0066 Tc
+0.0658 Tw
+(252, Avignon, 1993.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([18])Tj
+2.2 0 TD
+0.0329 Tc
+0.3287 Tw
+(UNCTAD Statistical Pocket Book, United)Tj
+0 -1.1 TD
+0.0086 Tc
+0.0863 Tw
+(Nations Conference on Trade & Development,)Tj
+T*
+0.0017 Tc
+0.0169 Tw
+(New York, 1984.)Tj
+-2.2 -1.1 TD
+-0.0218 Tc
+0 Tw
+([19])Tj
+2.2 0 TD
+0.0233 Tc
+0.2333 Tw
+(Yoda, M, Baba, K and Enbutu, I ìExplicit)Tj
+0 -1.1 TD
+-0.0004 Tc
+0 Tw
+(representation of knowledge acquired from plant)Tj
+T*
+0.0524 Tc
+0.5243 Tw
+(historical data using neural networks,î)Tj
+/TT8 1 Tf
+T*
+0.0359 Tc
+0.3591 Tw
+(International Joint Conference on Neural)Tj
+T*
+0.0709 Tc
+0 Tw
+(Networks,)Tj
+/TT4 1 Tf
+4.6659 0 TD
+0.0223 Tc
+0.2231 Tw
+[( San Diego, vol. 3, pp. 155-160,)]TJ
+-4.6659 -1.1 TD
+0.0125 Tc
+0 Tw
+(1991.)Tj
+ET
+endstream
+endobj
+41 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 5 0 R
+/TT8 7 0 R
+>>
+/ExtGState <<
+/GS1 8 0 R
+>>
+>>
+endobj
+42 0 obj
+<<
+/Type /Halftone
+/HalftoneType 5
+/Red 43 0 R
+/Green 44 0 R
+/Blue 45 0 R
+/Gray 46 0 R
+/Cyan 43 0 R
+/Magenta 44 0 R
+/Yellow 45 0 R
+/Black 46 0 R
+/Default 46 0 R
+>>
+endobj
+43 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 75
+/Angle 75
+/SpotFunction /SimpleDot
+>>
+endobj
+44 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 75
+/Angle 15
+/SpotFunction /SimpleDot
+>>
+endobj
+45 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 75
+/Angle 45
+/SpotFunction /SimpleDot
+>>
+endobj
+46 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 75
+/Angle 0
+/SpotFunction /SimpleDot
+>>
+endobj
+47 0 obj
+<<
+/Type /Halftone
+/HalftoneType 5
+/Red 48 0 R
+/Green 49 0 R
+/Blue 50 0 R
+/Gray 51 0 R
+/Cyan 48 0 R
+/Magenta 49 0 R
+/Yellow 50 0 R
+/Black 51 0 R
+/Default 51 0 R
+>>
+endobj
+48 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 72
+/Angle 75
+/SpotFunction /SimpleDot
+>>
+endobj
+49 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 72
+/Angle 15
+/SpotFunction /SimpleDot
+>>
+endobj
+50 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 72
+/Angle 45
+/SpotFunction /SimpleDot
+>>
+endobj
+51 0 obj
+<<
+/Type /Halftone
+/HalftoneType 1
+/Frequency 72
+/Angle 0
+/SpotFunction /SimpleDot
+>>
+endobj
+8 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP false
+/op false
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT /Default
+/TR2 /Default
+>>
+endobj
+22 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP false
+/op false
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT 42 0 R
+/TR2 /Default
+>>
+endobj
+23 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP false
+/op false
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT 47 0 R
+/TR2 /Default
+>>
+endobj
+52 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 676
+/Descent -250
+/Flags 262178
+/FontBBox [-168 -218 1000 935]
+/FontName /Times-Bold
+/ItalicAngle 0
+/StemV 133
+/XHeight 461
+/StemH 139
+>>
+endobj
+53 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 662
+/Descent -250
+/Flags 34
+/FontBBox [-168 -218 1000 898]
+/FontName /Times-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 450
+/StemH 84
+>>
+endobj
+54 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 669
+/Descent -250
+/Flags 262242
+/FontBBox [-200 -218 996 921]
+/FontName /Times-BoldItalic
+/ItalicAngle -15
+/StemV 133
+/XHeight 462
+/StemH 121
+>>
+endobj
+55 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 653
+/Descent -250
+/Flags 98
+/FontBBox [-169 -217 1010 883]
+/FontName /Times-Italic
+/ItalicAngle -15
+/StemV 76
+/XHeight 441
+/StemH 76
+>>
+endobj
+56 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 770
+/CapHeight 718
+/Descent -229
+/Flags 32
+/FontBBox [-166 -225 1000 931]
+/FontName /Helvetica
+/ItalicAngle 0
+/StemV 88
+/XHeight 523
+/StemH 88
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 121
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 0 0 250 0 
+0 500 500 500 500 500 500 500 0 0 0 0 0 0 0 0 
+0 722 667 722 722 667 611 778 778 389 0 0 667 944 722 0 
+611 0 722 556 667 722 0 0 0 0 0 0 0 0 0 0 
+0 500 556 444 556 444 333 500 556 278 0 556 278 833 556 500 
+556 0 444 389 333 556 0 722 500 500 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Bold
+/FontDescriptor 52 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 31
+/LastChar 148
+/Widths [722 250 722 408 500 722 833 778 722 333 333 722 722 250 333 250 
+722 500 500 500 500 500 500 500 500 500 500 278 278 722 722 722 
+722 921 722 667 667 722 611 556 722 722 333 389 722 611 889 722 
+722 556 722 667 556 611 722 722 944 722 722 611 333 722 333 722 
+722 722 444 500 444 500 444 333 500 500 278 278 500 278 778 500 
+500 500 500 333 389 278 500 500 722 500 500 444 480 722 480 722 
+722 722 722 722 722 722 722 722 722 722 722 722 722 722 722 722 
+722 722 722 722 444 444 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Roman
+/FontDescriptor 53 0 R
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 65
+/LastChar 84
+/Widths [667 667 667 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 667 556 611 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-BoldItalic
+/FontDescriptor 54 0 R
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 147
+/Widths [250 0 0 0 0 833 0 214 333 333 0 675 250 333 250 0 
+500 500 500 500 500 500 500 500 500 500 333 0 0 675 0 0 
+0 611 611 667 722 611 611 722 722 333 444 0 556 833 667 722 
+611 0 611 500 556 0 611 833 611 556 556 0 0 0 0 0 
+0 500 500 444 500 444 278 500 500 278 278 444 278 722 500 500 
+500 500 389 389 278 500 444 667 444 444 389 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 333 333 556 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Italic
+/FontDescriptor 55 0 R
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 50
+/LastChar 50
+/Widths [556 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Helvetica
+/FontDescriptor 56 0 R
+>>
+endobj
+27 0 obj
+<<
+/Filter /FlateDecode
+/Length 210
+>>
+stream
+HâTPª¬0‹˚AIÀZuÅ•Q`â[E¢N‰¶Cˇû§C¨‹ùO>[ÏÍ}M6Ä8≥”h-∆¡ç¨ÿYÇº cuX–\uØ<àhn¶!`_SÎ†,3qâ‚xÇ’µÿ»5àdK]$∂∑{$ö—˚'ˆH$Tl3±;(T=ÇH∂wù<B1„|Ï^idEBπïU,yHÊ_˚8Ì˛ZK)„?ãéèñÃi£o=2«àÛ⁄síî¡~/„ùO#”À^ N$jE
+endstream
+endobj
+33 0 obj
+<<
+/Filter /FlateDecode
+/Length 209
+>>
+stream
+HâTPªÉ0‹˘
+è≠:$î±¥C*¥{ö©8ë	ﬂÑæ‘!VÓŒ'ü-vıæ&@úŸÈtñ„Ë&÷wÏ-Aæcux£•ÍAy—‹Ãc¿°¶ŒAYf‚≈1´∂ÿ»5àdK}"Æ∑H4ì˜êH®*0ÿebwP˛®ël?Æù=¬v¡˘{∞38z•ëıe!´XÚ
+êÃøˆq‹ª¸µñR∆-ô”Fﬂzbéóµó$)É%¸^∆;üF¶ó= O¡jG
+endstream
+endobj
+1 0 obj
+<<
+/Type /Page
+/Parent 9 0 R
+/Resources 3 0 R
+/Contents 2 0 R
+>>
+endobj
+10 0 obj
+<<
+/Type /Page
+/Parent 9 0 R
+/Resources 12 0 R
+/Contents 11 0 R
+>>
+endobj
+13 0 obj
+<<
+/Type /Page
+/Parent 9 0 R
+/Resources 15 0 R
+/Contents 14 0 R
+>>
+endobj
+17 0 obj
+<<
+/Type /Page
+/Parent 9 0 R
+/Resources 19 0 R
+/Contents 18 0 R
+>>
+endobj
+36 0 obj
+<<
+/Type /Page
+/Parent 9 0 R
+/Resources 38 0 R
+/Contents 37 0 R
+>>
+endobj
+39 0 obj
+<<
+/Type /Page
+/Parent 9 0 R
+/Resources 41 0 R
+/Contents 40 0 R
+>>
+endobj
+57 0 obj
+<<
+/S /D
+>>
+endobj
+58 0 obj
+<<
+/Nums [0 57 0 R ]
+>>
+endobj
+9 0 obj
+<<
+/Type /Pages
+/Kids [1 0 R 10 0 R 13 0 R 17 0 R 36 0 R 39 0 R]
+/Count 6
+/MediaBox [0 0 595 842]
+>>
+endobj
+59 0 obj
+<<
+/CreationDate (D:20190405192655+11'00')
+/ModDate (D:20190405192655+11'00')
+/Producer (PSNormalizer.framework)
+>>
+endobj
+60 0 obj
+<<
+/Type /Catalog
+/Pages 9 0 R
+/PageLabels 58 0 R
+>>
+endobj
+xref
+0 61
+0000000000 65535 f 
+0000098908 00000 n 
+0000000016 00000 n 
+0000007236 00000 n 
+0000096319 00000 n 
+0000096763 00000 n 
+0000097406 00000 n 
+0000097627 00000 n 
+0000094898 00000 n 
+0000099471 00000 n 
+0000098988 00000 n 
+0000007364 00000 n 
+0000034267 00000 n 
+0000099071 00000 n 
+0000034385 00000 n 
+0000050853 00000 n 
+0000098177 00000 n 
+0000099154 00000 n 
+0000050984 00000 n 
+0000061812 00000 n 
+0000062023 00000 n 
+0000062742 00000 n 
+0000095038 00000 n 
+0000095177 00000 n 
+0000061976 00000 n 
+0000062255 00000 n 
+0000062322 00000 n 
+0000098343 00000 n 
+0000062369 00000 n 
+0000062532 00000 n 
+0000062695 00000 n 
+0000062974 00000 n 
+0000063041 00000 n 
+0000098626 00000 n 
+0000063088 00000 n 
+0000063251 00000 n 
+0000099237 00000 n 
+0000063414 00000 n 
+0000083541 00000 n 
+0000099320 00000 n 
+0000083659 00000 n 
+0000093598 00000 n 
+0000093716 00000 n 
+0000093896 00000 n 
+0000093999 00000 n 
+0000094102 00000 n 
+0000094205 00000 n 
+0000094307 00000 n 
+0000094487 00000 n 
+0000094590 00000 n 
+0000094693 00000 n 
+0000094796 00000 n 
+0000095316 00000 n 
+0000095518 00000 n 
+0000095715 00000 n 
+0000095924 00000 n 
+0000096124 00000 n 
+0000099403 00000 n 
+0000099431 00000 n 
+0000099587 00000 n 
+0000099719 00000 n 
+trailer
+<<
+/Size 61
+/Root 60 0 R
+/Info 59 0 R
+/ID [<f6213afd0a6fe0f09e4be3e69c4ab2a6><f6213afd0a6fe0f09e4be3e69c4ab2a6>]
+>>
+startxref
+99788
+%%EOF
